@@ -1,38 +1,191 @@
+button {cursor: pointer;}
+h2 {color: #666;}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
+/* 헤드 */
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 20px;
+  border-bottom: 2px solid #eee;
 }
 
-.App-link {
-  color: #61dafb;
+/* 몸통 */
+.App-body {
+  background-color: #f8f0ff;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 5px 5px rgba(161, 161, 161, 0.263) inset;
+}
+.vending-body {
+  width: 600px;
+  height: 650px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px;
+  border: 5px solid #ffffff;
+  box-sizing: border-box;
+  background-color: rgb(227, 239, 237);
+  box-shadow: 10px 10px 5px rgba(109, 109, 109, 0.41);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.machine-coin {
+  width: 100%;
+  height: 5%;
+}
+.body-left,
+.body-rigth {
+  height: 100%;
+}
+.body-left {
+  width: 60%;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.body-rigth {
+  width: 37%;
+  height: 70%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 왼쪽 */
+.item-display{
+  width: 100%;
+  height: 85%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 5px solid #ffffff;
+  background-color: rgb(218, 218, 218);
+  box-shadow: 5px 5px 5px 5px rgba(161, 161, 161, 0.714) inset;
+}
+.item-box{
+  width: 50%;
+  height: 25%;
+  float: left;
+  background-color: rgb(204, 139, 139);
+}
+.machine-coin {
+  width: 100%;
+  height: 12%;
+  color: #7786c5;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  background-color: rgb(252, 230, 226);
+  box-shadow: 5px 5px 5px rgba(161, 161, 161, 0.714) inset;
+  border: 5px solid #ffffff;
+  box-sizing: border-box;
+}
+
+/* 오른쪽 */
+.total-screen {
+  width: 100%;
+  height: 75px;
+  line-height: 65px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: rgb(252, 230, 226);
+  border: 5px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 5px 5px 5px rgba(161, 161, 161, 0.714) inset;
+}
+.total-num{
+  color: #7786c5;
+  font-size: 38px;
+  float: right;
+}
+.ent-coin-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: rgb(255, 235, 184);
+  border: 5px solid #ffffff;
+  box-sizing: border-box;
+  border-top: 5px solid #ffffff;
+  border-left: 5px solid #ffffff;
+  border-right: 5px solid #d8caaf;
+  border-bottom: 5px solid #c2b996;
+}
+.return-coin-btn {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  border-radius: 50%;
+  background-color: rgb(216, 216, 216);
+  box-sizing: border-box;
+  border-top: 5px solid #ffffff;
+  border-left: 5px solid #ffffff;
+  border-right: 5px solid #c7c7c7;
+  border-bottom: 5px solid #b4b4b4;
+}
+.ent-coin-btn:hover {
+  background-color: rgb(255, 220, 159);
+}
+.return-coin-btn:hover {
+  background-color: rgb(186, 186, 186);
+}
+.get-item-box{
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  background-color: rgb(199, 230, 212);
+  border: 5px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 5px 2px rgb(161, 161, 161) inset;
+}
+
+/* 푸터 */
+.App-footer {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid #eee;
+  color: #666;
+}
+.footer-box {
+  width: 600px;
+  height: 80px;
+  padding: 20px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+.footer-btn{
+  width: 70px;
+  height: 70px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 52px;
+  border-radius: 20px;
+  color: #666;
+  background-color: #fff;
+  border: 4px solid #d0d5ff;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 5px rgb(161, 161, 161);
+}
+.footer-btn:hover {
+  background-color: #d8eccf;
 }
