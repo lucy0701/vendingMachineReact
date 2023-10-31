@@ -304,6 +304,7 @@ h2 {color: #666;}
   border-radius: 10px;
   background-color: #bfbfbf95;
   backdrop-filter: blur(3px);
+  display: none;
   box-shadow: 3px 3px 5px 2px rgba(161, 161, 161, 0.662);
 }
 .user-coin-btn{
