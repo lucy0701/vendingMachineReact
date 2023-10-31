@@ -32,7 +32,7 @@ export default function BodyLeft() {
           return (
             <ItemBox
               key={index}
-              img={items.url}
+              image={item.url}
               stock={item.stock}
               price={item.price}
             />

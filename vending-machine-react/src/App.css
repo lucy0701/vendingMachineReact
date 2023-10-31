@@ -1,5 +1,6 @@
 button {cursor: pointer;}
 h2 {color: #666;}
+a {text-decoration: none;}
 
 .App {
   text-align: center;
@@ -32,18 +33,21 @@ h2 {color: #666;}
   box-sizing: border-box;
   box-shadow: 5px 5px 5px 5px rgba(161, 161, 161, 0.263) inset;
 }
-.vending-body {
+.App-page{
   width: 600px;
   height: 650px;
+  border: 5px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 5px rgba(109, 109, 109, 0.41);
+}
+.vending-body {
+  height: 100%;
+  box-sizing: border-box;
   padding: 20px;
   display: flex;
   position: relative;
   justify-content: space-between;
-  border-radius: 15px;
-  border: 5px solid #ffffff;
-  box-sizing: border-box;
   background-color: rgb(227, 239, 237);
-  box-shadow: 10px 10px 5px rgba(109, 109, 109, 0.41);
 }
 
 .machine-coin {
@@ -262,8 +266,7 @@ h2 {color: #666;}
   width: 70px;
   height: 70px;
   font-size: 18px;
-  text-align: center;
-  line-height: 52px;
+  line-height: 64px;
   border-radius: 20px;
   color: #666;
   background-color: #fff;
@@ -331,3 +334,100 @@ h2 {color: #666;}
   font-size: 15px;
   float: left;
 }
+
+#manager-page {
+  height: 100%;
+  font-size: 20px;
+  color: #666;
+  padding: 0 30px;
+  box-sizing: border-box;
+  background-color: rgb(227, 239, 237);
+}
+.manager-page-title{
+  width: 100%;
+  height: 8%;
+  float: left;
+}
+.manager-page-setting {
+  width: 60%;
+  height: 60%;
+  /* padding: 20px 40px; */
+  float: left;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content:center;
+  
+}
+
+.manager-input {
+  color: #333;
+  width: 120px;
+  height: 35px;
+  padding: 0 10px; 
+  margin: 20px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #9a9a9a;
+  box-sizing: border-box;
+}
+
+.manager-item-list {
+  width: 40%;
+  height: 60%;
+  padding: 5px;
+  float: left;
+  border-radius: 10px;
+  font-size: 15px;
+  box-sizing: border-box;
+  background-color: #ddbcbc;
+}
+.manager-item-list th {
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  background-color: #e5e5e588;
+}
+.item-list td{
+  border-radius: 5px;
+  background-color: #fff7f7;
+}
+
+.manager-btn-box{
+  width: 100%;
+  height: 10%;
+  margin-top: 50px;
+  float: left;
+  display: flex;
+  justify-content: space-around;
+}
+
+.save-btn {
+  width: 50px;
+  height: 40px;
+  border: 2px solid #9a9a9a;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: #f4c6c6e7;
+}
+.save-btn:hover {
+  background-color: #ffa8a8e7;
+}
+.home-btn {
+  line-height: 33px;
+  background-color: #e3e3e3e7;
+  width: 30%;
+  height: 40px;
+  color: #333;
+  margin-top: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 2px solid #9a9a9a;
+  box-sizing: border-box;
+}
+.home-btn:hover {
+  background-color: #c5c5c5e7;
+}
+
+
