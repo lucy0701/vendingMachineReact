@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ItemBox from './ItemBox';
+import ItemBox from '../ItemBox';
 
 export default function BodyLeft() {
   const [items, setItems] = useState([]);

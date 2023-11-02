@@ -1,7 +1,5 @@
 {
-  "totalAmount": {
-    "total": 0
-  },
+  "totalAmount": [{ "total": 0 }],
   "userCoins": [
     { "coin": "1", "count": 10 },
     { "coin": "5", "count": 10 },
@@ -35,20 +33,38 @@
       "stock": 10,
       "url": "/src_assets/img09.png"
     },
-    { "itemName": "콩", "price": 20, "stock": 10, "url": "/src_assets/img17.png" },
-    { "itemName": "재희", "price": 95, "stock": 10, "url": "/src_assets/img10.png" },
-    { "itemName": "번", "price": 18, "stock": 10, "url": "/src_assets/img14.png" },
+    {
+      "itemName": "콩",
+      "price": 20,
+      "stock": 10,
+      "url": "/src_assets/img17.png"
+    },
+    {
+      "itemName": "재희",
+      "price": 95,
+      "stock": 10,
+      "url": "/src_assets/img10.png"
+    },
+    {
+      "itemName": "번",
+      "price": 18,
+      "stock": 10,
+      "url": "/src_assets/img14.png"
+    },
     {
       "itemName": "승목",
       "price": 1000,
       "stock": 10,
       "url": "/src_assets/img15.png"
     },
-    { "itemName": "죽순", "price": 500, "stock": 10, "url": "/src_assets/img16.png" }
+    {
+      "itemName": "죽순",
+      "price": 500,
+      "stock": 10,
+      "url": "/src_assets/img16.png"
+    }
   ],
-  "myItemList": [
-    {"id":"", "url": ""}
-  ],
+  "myItemList": [{ "id": "", "url": "" }],
   "spareCoins": [
     { "coin": "1", "count": 0 },
     { "coin": "5", "count": 0 },

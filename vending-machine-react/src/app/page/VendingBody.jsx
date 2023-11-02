@@ -16,13 +16,29 @@ export default function VendingBody() {
     getUserCoinsData();
   }, []);
 
+  const onClickCoinBtn = e => {
+    console.log(e.target.value);
+  };
+
+  const [totalAmount, setTotalAmount] = useState([]);
+  const getTotalAmountData = () => {
+    axios.get(`http://localhost:3001/totalAmount`).then(res => {
+      setTotalAmount(res.data);
+    });
+  };
+  useEffect(() => {
+    getTotalAmountData();
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
   const onClickMadal = () => (isOpen ? setIsOpen(false) : setIsOpen(true));
+
+  console.log(totalAmount.totla);
 
   return (
     <div className="vending-body">
       <BodyLeft />
-      <BodyRigth onClickMadal={onClickMadal} />
+      <BodyRigth onClickMadal={onClickMadal} totalAmount={totalAmount} />
       <Modal name="coin-modal" isOpen={isOpen} onClickMadal={onClickMadal}>
         {userCoins.map(userCoin => {
           return (
@@ -30,6 +46,7 @@ export default function VendingBody() {
               key={userCoin.coin}
               coin={userCoin.coin}
               count={userCoin.count}
+              onClickCoinBtn={onClickCoinBtn}
             />
           );
         })}

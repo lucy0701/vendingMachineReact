@@ -54,7 +54,7 @@ export default function ManagerPage() {
             className="manager-input"
             min="0"
             max="20"
-            placeholder ={items[selectItem] ? items[selectItem].stock : ''}
+            placeholder={items[selectItem] ? items[selectItem].stock : ''}
           />
           <input
             type="submit"
