@@ -31,15 +31,13 @@ export default function VendingBody() {
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
-  const onClickMadal = () => (isOpen ? setIsOpen(false) : setIsOpen(true));
-
-  console.log(totalAmount.totla);
+  const onClickModal = () => (isOpen ? setIsOpen(false) : setIsOpen(true));
 
   return (
-    <div className="vending-body">
+    <div className="machine-body">
       <BodyLeft />
-      <BodyRigth onClickMadal={onClickMadal} totalAmount={totalAmount} />
-      <Modal name="coin-modal" isOpen={isOpen} onClickMadal={onClickMadal}>
+      <BodyRigth onClickMadal={onClickModal} totalAmount={totalAmount} />
+      <Modal name="coin-modal" isOpen={isOpen} onClickMadal={onClickModal}>
         {userCoins.map(userCoin => {
           return (
             <UserCoin

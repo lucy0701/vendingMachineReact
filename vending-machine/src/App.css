@@ -406,6 +406,7 @@ a {text-decoration: none;}
 .save-btn {
   width: 50px;
   height: 40px;
+  color: #666;
   border: 2px solid #9a9a9a;
   box-sizing: border-box;
   border-radius: 5px;
@@ -419,6 +420,7 @@ a {text-decoration: none;}
   background-color: #e3e3e3e7;
   width: 30%;
   height: 40px;
+  color: #666;
   margin-top: 10px;
   font-size: 18px;
   border-radius: 5px;
