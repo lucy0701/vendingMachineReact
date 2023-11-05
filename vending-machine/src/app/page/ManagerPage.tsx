@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import ItemTable from '../components/ItemTable';
 
 export default function ManagerPage() {
   return (
@@ -9,9 +10,7 @@ export default function ManagerPage() {
         <label htmlFor="manager-input">
           아이템
           <select className="manager-input" id="manager-input">
-            <option disabled>
-              아이템 선택
-            </option>
+            <option disabled>아이템 선택</option>
             <option key="" value="">
               수정
             </option>
@@ -54,22 +53,7 @@ export default function ManagerPage() {
           />
         </label>
       </div>
-
-      <table className="manager-item-list">
-        <tbody>
-          <tr>
-            <th>List</th>
-            <th>Stock</th>
-            <th>Price</th>
-          </tr>
-          <tr key="" className="item-list">
-            <td className="item-list-name">이름</td>
-            <td>재고</td>
-            <td>가격</td>
-          </tr>
-        </tbody>
-      </table>
-
+      <ItemTable />
       <div className="manager-btn-box">
         <Link to="/" className="manager-btn home-btn">
           홈으로
