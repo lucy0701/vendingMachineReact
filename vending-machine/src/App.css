@@ -15,14 +15,14 @@ a {text-decoration: none;}
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 /* 몸통 */
 .App-body {
   background-color: #f8f0ff;
-  width: 900px;
-  height: 750px;
+  width: 800px;
+  height: 600px;
   overflow: hidden;
   margin: auto;
   display: flex;
@@ -34,8 +34,8 @@ a {text-decoration: none;}
   box-shadow: 5px 5px 5px 5px rgba(161, 161, 161, 0.263) inset;
 }
 .App-page{
-  width: 600px;
-  height: 650px;
+  width: 500px;
+  height: 550px;
   border: 5px solid #ffffff;
   box-sizing: border-box;
   box-shadow: 10px 10px 5px rgba(109, 109, 109, 0.41);
@@ -96,8 +96,8 @@ a {text-decoration: none;}
 }
 .item-img-print,
 .drop-item {
-  width: 90px;
-  height: 90px;
+  width: 75px;
+  height: 75px;
   display: block;
   margin: auto;
   border-radius: 50%;
@@ -119,27 +119,27 @@ a {text-decoration: none;}
   background-color: #ff0000b6;
 }
 .item-stock {
-  width: 25px;
-  height: 25px;
-  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
   text-align: center;
-  line-height: 25px;
+  line-height: 20px;
   border-radius: 50%;
   position: absolute;
-  left: 25px;
+  left: 20px;
   top: 8px;
   color: #666;
   background-color: #ffffff;
 }
 .item-price{
-  width: 45px;
-  height: 20px;
-  line-height: 20px;
-  font-size: 15px;
+  width: 35px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 14px;
   text-align: center;
   position: absolute;
-  bottom: 40px;
-  right: 10px;
+  bottom: 30px;
+  right: 7px;
   color: #666;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
@@ -152,8 +152,8 @@ a {text-decoration: none;}
   font-weight: bold;
   display: block;
   position: absolute;
-  bottom: 5px;
-  left: 27px;
+  bottom: 2px;
+  left: 22px;
   border-radius: 10px;
   color: #984a4a;
   background-color: #fffbeb;
@@ -301,8 +301,8 @@ a {text-decoration: none;}
   width: 100px;
   padding: 10px;
   position: absolute;
-  top: 220px;
-  right: -20px;
+  top: 190px;
+  right: -40px;
   box-sizing: border-box;
   border-radius: 10px;
   background-color: #bfbfbf95;
@@ -334,10 +334,14 @@ a {text-decoration: none;}
   font-size: 15px;
   float: left;
 }
+.coin-modal-close-btn {
+  width: 60px;
+  height: 20px;
+  font-size: 12px;
+}
 
 #manager-page {
   height: 100%;
-  font-size: 20px;
   color: #666;
   padding: 0 30px;
   box-sizing: border-box;
@@ -345,53 +349,68 @@ a {text-decoration: none;}
 }
 .manager-page-title{
   width: 100%;
-  height: 8%;
+  height: 30px;
+  font-size: 23px;
   float: left;
 }
 .manager-page-setting {
-  width: 60%;
-  height: 60%;
-  /* padding: 20px 40px; */
+  width: 50%;
+  height: 350px;
+  font-size: 15px;
   float: left;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
   justify-content:center;
-  
 }
 
 .manager-input {
   color: #333;
-  width: 120px;
+  width: 100px;
   height: 35px;
   padding: 0 10px; 
-  margin: 20px;
+  margin: 10px;
   font-size: 15px;
   border-radius: 5px;
   border: 2px solid #9a9a9a;
   box-sizing: border-box;
 }
+.manager-img{
+  width: 155px;
+  height: 35px;
+  font-size: 11px;
+  padding: 0 10px; 
+  margin: 10px;
+  box-sizing: border-box;
+}
 
 .manager-item-list {
-  width: 40%;
-  height: 60%;
+  width: 50%;
+  height: 350px;
   padding: 5px;
   float: left;
   border-radius: 10px;
   font-size: 15px;
   box-sizing: border-box;
+  overflow: auto;
   background-color: #ddbcbc;
 }
 .manager-item-list th {
   width: 50px;
-  height: 30px;
-  line-height: 30px;
+  height: 20px;
+  line-height: 20px;
   border-radius: 5px;
   background-color: #e5e5e588;
 }
-.item-list td{
-  border-radius: 5px;
+.item-list{
+  height: 20px;
   background-color: #fff7f7;
+  cursor: pointer;
+}
+.item-list:hover{
+  font-weight: bold;
+  transform: scale( 1.1, 1.1 );
+  transition: .5s;
 }
 
 .manager-btn-box{
@@ -400,35 +419,53 @@ a {text-decoration: none;}
   margin-top: 50px;
   float: left;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
-.save-btn {
-  width: 50px;
-  height: 40px;
-  color: #666;
-  border: 2px solid #9a9a9a;
-  box-sizing: border-box;
-  border-radius: 5px;
-  background-color: #f4c6c6e7;
-}
-.save-btn:hover {
-  background-color: #ffa8a8e7;
-}
-.home-btn {
-  line-height: 33px;
-  background-color: #e3e3e3e7;
+.manager-btn {
   width: 30%;
   height: 40px;
   color: #666;
-  margin-top: 10px;
   font-size: 18px;
+  line-height: 33px;
+  background-color: #fff4c4;
   border-radius: 5px;
-  border: 2px solid #9a9a9a;
+  border: 2px solid #9c8b8b;
   box-sizing: border-box;
+  cursor: pointer;
 }
-.home-btn:hover {
-  background-color: #c5c5c5e7;
+.manager-btn:hover {
+  background-color: rgba(255, 216, 162, 0.906)
 }
-
-
+.manager-home-btn{
+  background-color: #d0e1f0;
+}
+.manager-home-btn:hover {
+  background-color: rgba(182, 202, 214, 0.906)
+}
+.form-btn-box {
+  height: 30px;
+  margin-top: 15px;
+  position: relative;
+}
+.form-btn {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+}
+.form-btn-01{
+  width: 100px;
+  left: 65px;
+}
+.form-btn-02{
+  left: 50px;
+}
+.form-btn-03{
+  left: 120px;
+}
+.form-warning-message {
+  position: absolute;
+  color: red;
+  left: 40px;
+  top: 20px;
+}

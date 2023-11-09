@@ -25,7 +25,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: [
+    '@typescript-eslint',
+    'react',
+    'react-hooks',
+    'jsx-a11y',
+    'prettier',
+  ],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'no-var': 'warn', // var 금지

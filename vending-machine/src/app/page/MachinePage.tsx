@@ -72,8 +72,6 @@ export default function MachinePage() {
     getItems();
   }, []);
 
-  const [totalAmount, setTotalAmount] = useState(0);
-
   return (
     <div className="machine-body">
       <div className="body-left">
@@ -94,9 +92,7 @@ export default function MachinePage() {
           {machineCoins.map(machineCoin => {
             return (
               <p className="machine-coin-screen" key={machineCoin.coin}>
-                <span className="machine-coin-name">
-                  {machineCoin.coin} :
-                </span>
+                <span className="machine-coin-name">{machineCoin.coin} :</span>
                 {machineCoin.count}
               </p>
             );
@@ -106,7 +102,7 @@ export default function MachinePage() {
       <div className="body-rigth">
         <h2>CRYSTAL</h2>
         <div className="total-screen">
-          <span className="total-num">{totalAmount}</span>
+          <span className="total-num">0</span>
         </div>
         <button className="ent-coin-btn" onClick={onClickModal}>
           Click
@@ -114,7 +110,13 @@ export default function MachinePage() {
         <button className="return-coin-btn">반환</button>
         <div className="get-item-box" />
       </div>
-      <Modal name="coin-modal" isOpen={isOpen} onClickModal={onClickModal}>
+      <Modal
+        name="coin-modal"
+        isOpen={isOpen}
+        onClickModal={onClickModal}
+        btnClassName="coin-modal-close-btn"
+        btnName="CLOSE"
+      >
         {userCoins.map(userCoin => {
           return (
             <UserCoin

@@ -1,30 +1,39 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import axios from '../../axios/axios-config';
+import React, { useState } from 'react';
 
 interface Items {
+  id: number;
   itemName: string;
   price: number;
   stock: number;
   url: string;
 }
 
-export default function ItemTable() {
-  const [items, setItems] = useState<Items[]>([]);
+interface ItemTableProps {
+  items: Items[];
+  addSelectItem: (item: Items) => void;
+  setIsActiveInput: (isActiveInput: boolean) => void;
+  isActiveTable: boolean;
+}
 
-  const getItems = () => {
-    axios
-      .get('/items')
-      .then(res => {
-        setItems(res.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+const ItemTable: React.FC<ItemTableProps> = ({ items, addSelectItem, setIsActiveInput,isActiveTable }) => {
+  const [selectedTarget, setSelectedTarget] = useState<HTMLElement | null>(
+    null,
+  );
+
+  const onClickItemList = (e: React.MouseEvent, item: Items) => {
+    const target = e.currentTarget as HTMLElement;
+    if(isActiveTable){
+      if (selectedTarget) {
+        selectedTarget.style.background = '#fff7f7';
+      }
+      target.style.background = '#c3e9bf';
+  
+      setSelectedTarget(target);
+      addSelectItem(item);
+      setIsActiveInput(false);
+    }
+
   };
-  useEffect(() => {
-    getItems();
-  }, []);
 
   return (
     <table className="manager-item-list">
@@ -34,9 +43,16 @@ export default function ItemTable() {
           <th>Stock</th>
           <th>Price</th>
         </tr>
-        {items.map((item,index) => {
+        {items.map((item, index) => {
           return (
-            <tr key={index} className="item-list">
+            <tr
+              key={index}
+              className="item-list"
+              data-type={index}
+              onClick={e => {
+                onClickItemList(e, item);
+              }}
+            >
               <td className="item-list-name">{item.itemName}</td>
               <td>{item.stock}</td>
               <td>{item.price}</td>
@@ -46,4 +62,5 @@ export default function ItemTable() {
       </tbody>
     </table>
   );
-}
+};
+export default ItemTable;
