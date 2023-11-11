@@ -64,13 +64,6 @@
       "url": "/src_assets/img12.png"
     },
     {
-      "id": 2,
-      "itemName": "루미",
-      "price": 700,
-      "stock": 10,
-      "url": "/src_assets/img09.png"
-    },
-    {
       "id": 3,
       "itemName": "콩",
       "price": 20,
@@ -81,14 +74,14 @@
       "id": 4,
       "itemName": "재희",
       "price": 95,
-      "stock": 10,
+      "stock": "1",
       "url": "/src_assets/img10.png"
     },
     {
       "id": 5,
       "itemName": "번",
       "price": 18,
-      "stock": 10,
+      "stock": "1",
       "url": "/src_assets/img10.png"
     },
     {

@@ -16,7 +16,7 @@
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true, 
+    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "build",
     "rootDir": "./",
@@ -24,7 +24,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es6",
+    "target": "es6"
   },
-  "include": ["src", "src/axios/axios-config.js"]
+  "include": ["src", "src/services/axios.ts"]
 }

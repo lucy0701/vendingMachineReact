@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import Template from './app/page/Template';
-import MachinePage from './app/page/MachinePage';
-import ManagerPage from './app/page/ManagerPage';
+import Template from './page/Template';
+import MachinePage from './page/MachinePage';
+import ManagerPage from './page/ManagerPage';
 
 export default function Router() {
   return (
