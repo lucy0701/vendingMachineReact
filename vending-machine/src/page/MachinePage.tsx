@@ -1,67 +1,31 @@
-import { useEffect, useState } from 'react';
-import axios from '../services/axios';
+import { useState } from 'react';
 import ItemBox from '../components/ItemBox';
 import Modal from '../components/Modal';
 import UserCoin from '../components/UserCoin';
+import { formatPrice } from '../utils/number';
 import { useItems } from '../hooks/useItems';
-import { Coin } from '../types/coin';
+import { useMachineCoins } from '../hooks/useMachineCoins';
+import { useUserCoins } from '../hooks/useUserCoins';
+import { useTotalAmount } from '../hooks/useTotalAmount';
 
 // TODO: 타입 정리
 
 export default function MachinePage() {
+  const { items } = useItems();
+  const { machineCoins } = useMachineCoins();
+  const { userCoins } = useUserCoins();
+  const { totalAmount } = useTotalAmount();
+
   const [isOpen, setIsOpen] = useState(false);
   const onClickModal = () => (isOpen ? setIsOpen(false) : setIsOpen(true));
-
-  const { items } = useItems();
-
-  const [userCoins, setUserCoins] = useState<Coin[]>([]);
-
-  useEffect(() => {
-    const getUserCoins = () => {
-      axios
-        .get('/user-coins')
-        .then(res => {
-          setUserCoins(res.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
-
-    getUserCoins();
-  }, []);
-
-  const [machineCoins, setMachineCoins] = useState<Coin[]>([]);
-
-  useEffect(() => {
-    const getMachineCoins = () => {
-      axios
-        .get('/user-coins')
-        .then(res => {
-          setMachineCoins(res.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
-    getMachineCoins();
-  }, []);
 
   return (
     <div className="machine-body">
       <div className="body-left">
         <div className="item-display">
-          {items.map(item => {
-            return (
-              <ItemBox
-                key={item.itemName}
-                price={item.price}
-                stock={item.stock}
-                url={item.url}
-                itemName={item.itemName}
-              />
-            );
-          })}
+          {items.map(item => (
+            <ItemBox key={item.id} item={item} />
+          ))}
         </div>
         <div className="machine-coin">
           {machineCoins.map(machineCoin => {
@@ -77,7 +41,7 @@ export default function MachinePage() {
       <div className="body-rigth">
         <h2>CRYSTAL</h2>
         <div className="total-screen">
-          <span className="total-num">0</span>
+          <span className="total-num">{formatPrice(totalAmount)}</span>
         </div>
         <button className="ent-coin-btn" onClick={onClickModal}>
           Click
@@ -93,13 +57,7 @@ export default function MachinePage() {
         btnName="CLOSE"
       >
         {userCoins.map(userCoin => {
-          return (
-            <UserCoin
-              key={userCoin.coin}
-              coin={userCoin.coin}
-              count={userCoin.count}
-            />
-          );
+          return <UserCoin key={userCoin.coin} userCoin={userCoin} />;
         })}
       </Modal>
     </div>

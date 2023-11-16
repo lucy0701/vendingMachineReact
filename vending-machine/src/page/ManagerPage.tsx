@@ -1,81 +1,53 @@
 import ItemTable from '../components/ItemTable';
-import React, { useRef, useState } from 'react';
-import FormBtn from '../components/FormBtn';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { Item } from '../types/item';
-import { formatPrice } from '../utils/number';
 import { useItems } from '../hooks/useItems';
-
-// interface ManagerPageProps {
-//   addItem: (selectItem:Item) => void;
-//   updateItem: (updatedItem: Item) => void;
-//   deleteItem: (deleteItem: Item) => void;
-// }
+import { formatPrice } from '../utils/number';
+import CheckModal from '../components/CheckModal';
+import { Link } from 'react-router-dom';
 
 export default function ManagerPage() {
   // TODO: 커스텀 훅 사용 익혀보기
   // TODO: 전역 상태관리 나중에 적용
-  // const { items, refreshItems } = useItems();
-  // const { items } = useItems();
-  const { items, addItem, updateItem, removeItem } = useItems();
+  // TODO: 가격 제한폭 + 안내문구 추가
 
+  // 저장 및 삭제 모달
+  // 컴포넌트 분리 (정리)
+  // 자판기 : 동전 드래그
+  // 초기화 버튼
+  // 전역 상태관리 나중에 적용
+
+  const { saveItem, items, addItem, removeItem } = useItems();
+  const getItemList = [...items];
   const [selectItem, setSelectItem] = useState<Item>({
-    id: -1,
+    id: 0,
     itemName: '',
     price: 0,
     stock: 0,
     url: '',
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
-  const [isActiveBtn, setIsActiveBtn] = useState(false);
-  const [isActiveInput, setIsActiveInput] = useState(true);
-  const [isActiveTable, setIsActiveTable] = useState(true);
 
-  // const creactItem = (selectItem: Item) => {
-  //   axios
-  //     .post(`/items`, selectItem)
-  //     .then(res => {
-  //       console.log('서버 응답', res.data);
-  //       return refreshItems();
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // };
 
-  // const saveItem = (updatedItem: Item) => {
-  //   const itemId = updatedItem.id;
-
-  //   axios
-  //     .put(`/items/${itemId}`, updatedItem)
-  //     .then(res => {
-  //       console.log('서버 응답', res.data);
-  //       return refreshItems();
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const deleteItem = (deleteItem: Item) => {
-  //   const itemId = deleteItem.id;
-
-  //   axios
-  //     .delete(`/items/${itemId}`)
-  //     .then(res => {
-  //       console.log('삭제 성공', res.data);
-  //       return refreshItems();
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // };
-
-  const addSelectItem = (item: Item) => {
-    setSelectItem(item);
+  const toggleModal = (message: string, isDisabled: boolean) => {
+    setIsDisabled(isDisabled);
+    setModalMessage(message);
+    onClickModalBtn();
   };
 
-  const onClickCreactItem = () => {
+  const onClickModalBtn = () => {
+    setIsShow(!isShow);
+  };
+
+  const onClickToggleBtn = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onClickAddItem = () => {
     if (
       items.length < 8 &&
       selectItem.price > 0 &&
@@ -83,96 +55,84 @@ export default function ManagerPage() {
       selectItem.itemName !== null
     ) {
       addItem(selectItem);
+      onClickModalBtn();
+      setSelectItem({ id: 0, itemName: '', price: 0, stock: 0, url: '' });
     }
   };
 
-  const onSubmitSaveFormData = () => {
-    if (selectItem.id !== -1) {
-      updateItem(selectItem);
+  const onClickDeleteItem = (item: Item) => {
+    removeItem(item);
+  };
+
+  const handleAddItem = () => {
+    if (items.length >= 8) {
+      toggleModal('최대 8개까지 등록이 가능', true);
+    } else if (selectItem.itemName === null) {
+      toggleModal('이름을 입력하세요', true);
+    } else if (selectItem.price <= 0 && selectItem.stock <= 0) {
+      toggleModal('아이템과 재고는 0이상 입력', true);
+    } else {
+      toggleModal('아이템을 추가 하시겠습니까?', false);
     }
   };
-
-  const onClickDeleteItem = () => {
-    removeItem(selectItem);
+  const handleDeleteItem = () => {
+    toggleModal('삭제 하시겠습니까?', false);
   };
 
-  const onChangeInput = (
+  const onChangeUpdateInput = (
     e: React.ChangeEvent<HTMLInputElement>,
     key: string,
+    maxMum: number,
   ) => {
     const num = Number(e.target.value.replaceAll(',', ''));
-
-    // TODO: 가격 제한폭 + 안내문구 추가
-    if (!Number.isInteger(num) || (Number.isInteger(num) && num > 10000)) {
+    if (!Number.isInteger(num) || (Number.isInteger(num) && num > maxMum)) {
       e.preventDefault();
       return;
     }
-
     setSelectItem(prev => ({
       ...prev,
       [key]: formatPrice(num),
     }));
   };
 
-  // const onChangePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const inputText = e.target.value.replace(/[^0-9]/g, '');
-  //   const formattedNumber = inputText.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  //   setSelectItem(prev => ({
-  //     ...prev,
-  //     price: Number(formattedNumber.replace(/,/g, '')),
-  //   }));
-  // };
-
-  // const handleChangeStockInput: ChangeEventHandler<HTMLInputElement> = e => {
-  //   setSelectItem(prev => ({
-  //     ...prev,
-  //     stock: Number(e.currentTarget.value),
-  //   }));
-  // };
-
-  // const handleChangePriceInput: ChangeEventHandler<HTMLInputElement> = e => {
-  //   setSelectItem(prev => ({
-  //     ...prev,
-  //     price: Number(e.currentTarget.value),
-  //   }));
-  // };
-
-  // const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-  //   setSelectItem(prev => ({
-  //     ...prev,
-  //     [e.currentTarget.name]: Number(e.currentTarget.value),
-  //   }));
-  // };
-
-  const prevSelectItemRef = useRef<Item>(selectItem);
-
-  const onClickOpenCreactBtn = () => {
-    prevSelectItemRef.current = selectItem;
-    setSelectItem({
-      id: 0,
-      itemName: '',
-      price: 0,
-      stock: 0,
-      url: '',
-    });
-    setIsActiveBtn(true);
-    setIsActiveInput(false);
-    setIsActiveTable(false);
+  const [updateItems, setUpdateItems] = useState<Item[]>([]);
+  const updateItmeList = (index: number) => {
+    setUpdateItems(updateItems => [
+      ...updateItems.filter(item => item.id !== getItemList[index].id),
+      getItemList[index],
+    ]);
   };
-  const onClickCloseBtn = () => {
-    setSelectItem(prevSelectItemRef.current);
-    setIsActiveBtn(false);
-  };
-  const onClickCloseCreactBtn = () => {
-    setSelectItem(prevSelectItemRef.current);
-    setIsActiveBtn(false);
-    setIsActiveTable(true);
-    if (prevSelectItemRef.current.id === -1) {
-      setIsActiveInput(true);
+  const onChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    key: keyof Item,
+    index: number,
+    maxMum: number,
+  ) => {
+    const num = Number(e.currentTarget.value.replaceAll(',', ''));
+
+    if (!Number.isInteger(num) || (Number.isInteger(num) && num > maxMum)) {
+      e.preventDefault();
+      return;
     }
+    (getItemList as any)[index][key] = num;
+    updateItmeList(index);
   };
-  const onClickOpenDelelteBtn = () => {
-    setIsActiveBtn(true);
+
+  const onChangeTextInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    key: keyof Item,
+    index: number,
+  ) => {
+    
+    const name = e.currentTarget.value;
+    (getItemList as any)[index][key] = name;
+    updateItmeList(index);
+  };
+
+  const onClickSaveItem = () => {
+    updateItems.forEach(item => {
+      saveItem(item);
+    });
   };
 
   return (
@@ -180,97 +140,100 @@ export default function ManagerPage() {
       <h2 className="manager-page-title">관리자 페이지</h2>
 
       <div className="manager-page-setting">
-        <label htmlFor="stock-change">
-          이름
-          <input
-            type="text"
-            id="name-change"
-            placeholder="아이템 이름"
-            className="manager-input manager-item-name"
-            value={selectItem.itemName}
-            onChange={e => {
-              setSelectItem(prev => ({
-                ...prev,
-                itemName: e.target.value,
-              }));
-            }}
-            disabled={isActiveInput}
-          />
-        </label>
+        <div style={{ visibility: isOpen ? 'visible' : 'hidden' }}>
+          <label>
+            이름
+            <input
+              type="text"
+              className="add-item-input"
+              value={selectItem.itemName}
+              onChange={e => {
+                setSelectItem(prev => ({
+                  ...prev,
+                  itemName: e.target.value,
+                }));
+              }}
+            />
+          </label>
 
-        <label htmlFor="stock-change">
-          재고
-          <input
-            type="text"
-            id="stock-change"
-            className="manager-input"
-            value={selectItem.stock
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            onChange={e => {
-              onChangeInput(e, 'stock');
-            }}
-            disabled={isActiveInput}
-          />
-        </label>
+          <label>
+            가격
+            <input
+              type="text"
+              className="add-item-input"
+              value={selectItem.price}
+              onChange={e => {
+                onChangeUpdateInput(e, 'price', 10000);
+              }}
+            />
+          </label>
 
-        <label htmlFor="price-change">
-          가격
-          <input
-            type="text"
-            id="price-change"
-            className="manager-input"
-            value={selectItem.price
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            onChange={e => {
-              onChangeInput(e, 'price');
-            }}
-            disabled={isActiveInput}
-          />
-        </label>
-        <div className="form-btn-box">
+          <label>
+            재고
+            <input
+              type="text"
+              className="add-item-input"
+              value={selectItem.stock}
+              onChange={e => {
+                onChangeUpdateInput(e, 'stock', 2000);
+              }}
+            />
+          </label>
+        </div>
+        <div className="add-item-box">
           <button
             type="button"
-            id="save-btn"
-            className="form-btn form-btn-01"
-            onClick={() => {
-              onSubmitSaveFormData();
-            }}
-            disabled={isActiveBtn || isActiveInput}
+            className="add-item-btn"
+            style={{ display: isOpen ? 'none' : 'block' }}
+            onClick={onClickToggleBtn}
           >
-            아이템 수정
+            아이템 추가
+          </button>
+          <button
+            type="button"
+            className="add-item-btn"
+            style={{ display: isOpen ? 'block' : 'none' }}
+            onClick={() => handleAddItem()}
+          >
+            추가
+          </button>
+          <button
+            type="button"
+            className="add-item-btn"
+            style={{ display: isOpen ? 'block' : 'none' }}
+            onClick={onClickToggleBtn}
+          >
+            취소
           </button>
         </div>
-
-        <FormBtn
-          openBtnValue="아이템 추가"
-          checkBtn="추가"
-          onClickFormBtn={onClickCreactItem}
-          onClickCloseBtn={onClickCloseCreactBtn}
-          onClickOpenBtn={onClickOpenCreactBtn}
-          btnActive={isActiveBtn}
-        />
-        <FormBtn
-          openBtnValue="아이템 삭제"
-          checkBtn="삭제"
-          onClickOpenBtn={onClickOpenDelelteBtn}
-          onClickCloseBtn={onClickCloseBtn}
-          onClickFormBtn={onClickDeleteItem}
-          btnActive={isActiveBtn || isActiveInput}
-        />
       </div>
       <ItemTable
-        items={items}
-        addSelectItem={addSelectItem}
-        setIsActiveInput={setIsActiveInput}
-        isActiveTable={isActiveTable}
+        getItemList={getItemList}
+        onClickDeleteItem={onClickDeleteItem}
+        handleDeleteItem={handleDeleteItem}
+        onChangeTextInput={onChangeTextInput}
+        onChangeInput={onChangeInput}
       />
       <div className="manager-btn-box">
-        <Link to="/" className="manager-btn manager-home-btn">
+        <Link to="/" className="manager-btn">
           Home
         </Link>
+
+        <button
+          type="button"
+          className="manager-btn"
+          onClick={() => onClickSaveItem()}
+        >
+          아이템 수정
+        </button>
       </div>
+      <CheckModal
+        modalMessage={modalMessage}
+        isShow={isShow}
+        onClickModalCheckBtn={onClickAddItem}
+        onClickModalBtn={onClickModalBtn}
+        isDisabled={isDisabled}
+      />
     </form>
   );
 }

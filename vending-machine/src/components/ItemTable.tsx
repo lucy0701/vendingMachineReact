@@ -1,68 +1,108 @@
 import React, { useState } from 'react';
-
-interface Items {
-  id: number;
-  itemName: string;
-  price: number;
-  stock: number;
-  url: string;
-}
+import { Item } from '../types/item';
+import { formatPrice } from '../utils/number';
 
 interface ItemTableProps {
-  items: Items[];
-  // eslint-disable-next-line no-unused-vars
-  addSelectItem: (item: Items) => void;
-  // eslint-disable-next-line no-unused-vars
-  setIsActiveInput: (isActiveInput: boolean) => void;
-  isActiveTable: boolean;
+  getItemList: Item[];
+  onClickDeleteItem: (item: Item) => void;
+  handleDeleteItem: () => void;
+  onChangeInput: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    key: keyof Item,
+    index: number,
+    maxMum: number,
+  ) => void;
+  onChangeTextInput: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    key: keyof Item,
+    index: number,
+  ) => void;
 }
 
-const ItemTable: React.FC<ItemTableProps> = ({ items, addSelectItem, setIsActiveInput,isActiveTable }) => {
+const ItemTable: React.FC<ItemTableProps> = ({
+  getItemList,
+  onClickDeleteItem,
+  onChangeTextInput,
+  onChangeInput,
+}) => {
   const [selectedTarget, setSelectedTarget] = useState<HTMLElement | null>(
     null,
   );
 
-  const onClickItemList = (e: React.MouseEvent, item: Items) => {
+  const onClickItemList = (e: React.MouseEvent) => {
     const target = e.currentTarget as HTMLElement;
-    if(isActiveTable){
-      if (selectedTarget) {
-        selectedTarget.style.background = '#fff7f7';
-      }
-      target.style.background = '#c3e9bf';
-  
-      setSelectedTarget(target);
-      addSelectItem(item);
-      setIsActiveInput(false);
-    }
 
+    if (selectedTarget) {
+      selectedTarget.style.background = '#fff7f7';
+    }
+    target.style.background = '#c3e9bf';
+    setSelectedTarget(target);
   };
 
   return (
-    <table className="manager-item-list">
-      <tbody>
-        <tr>
-          <th>List</th>
-          <th>Stock</th>
-          <th>Price</th>
-        </tr>
-        {items.map((item, index) => {
-          return (
-            <tr
-              key={index}
-              className="item-list"
-              data-type={index}
-              onClick={e => {
-                onClickItemList(e, item);
-              }}
-            >
-              <td className="item-list-name">{item.itemName}</td>
-              <td>{item.stock}</td>
-              <td>{item.price}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div className="manager-item-table">
+      <table className="manager-item-list">
+        <tbody>
+          <tr>
+            <th>List</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Delete</th>
+          </tr>
+          {getItemList.map((item, index) => {
+            return (
+              <tr
+                key={item.id}
+                className="item-list"
+                onClick={e => {
+                  onClickItemList(e);
+                }}
+              >
+                <td className="item-list-name">
+                  <input
+                    type="text"
+                    className="manager-input"
+                    value={item.itemName}
+                    onChange={e => {
+                      onChangeTextInput(e, 'itemName', index);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    className="manager-input"
+                    value={formatPrice(item.price)}
+                    onChange={e => {
+                      onChangeInput(e, 'price', index, 10000);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    className="manager-input"
+                    value={formatPrice(item.stock)}
+                    onChange={e => {
+                      onChangeInput(e, 'stock', index, 2000);
+                    }}
+                  />
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => onClickDeleteItem(item)}
+                    // onClick={handleDeleteItem}
+                  >
+                    삭제
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 export default ItemTable;

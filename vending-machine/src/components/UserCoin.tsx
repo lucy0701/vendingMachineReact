@@ -1,17 +1,13 @@
 import React from 'react';
+import { Coin } from '../types/coin';
 
-interface UserCoinProps {
-  coin: string;
-  count: number;
-}
-
-const UserCoin: React.FC<UserCoinProps> = ({ coin, count }) => {
+const UserCoin: React.FC<{ userCoin: Coin }> = ({ userCoin }) => {
   return (
     <>
       <button className="user-coin-btn" value="">
-        {coin}
+        {userCoin.coin}
       </button>
-      <p className="user-coin-count"> {count} </p>
+      <p className="user-coin-count"> {userCoin.count} </p>
     </>
   );
 };

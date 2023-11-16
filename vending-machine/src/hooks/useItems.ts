@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
-import { readItems, createItem, saveItem, deleteItem } from '../services/item';
+import { readItems, createItem, updateItem, deleteItem } from '../services/item';
 import { Item } from '../types/item';
 
 export const useItems = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, refreshItems] = useState<Item[]>([]);
 
   const getItems = async () => {
     try {
       const response = await readItems();
-
       if (response) {
-        setItems(response.data);
+        refreshItems(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -28,10 +27,10 @@ export const useItems = () => {
     }
   };
 
-  const updateItem = async (updateItem: Item) => {
-    const { id } = updateItem;
+  const saveItem = async (saveItem: Item) => {
+    const { id } = saveItem;
     try {
-      const response = await saveItem(id);
+      const response = await updateItem(id, saveItem);
       if (response) {
         return getItems();
       }
@@ -42,8 +41,9 @@ export const useItems = () => {
 
   const removeItem = async (removeItem: Item) => {
     const { id } = removeItem;
+
     try {
-      const response = await deleteItem(id);
+      const response = await deleteItem(id, removeItem);
       if (response) {
         return getItems();
       }
@@ -52,21 +52,9 @@ export const useItems = () => {
     }
   };
 
-  // const addItem = (addItem: Item) => {
-  //   axios
-  //   .post('/items', addItem)
-  //   .then(res => {
-  //     console.log('서버 응답', res.data);
-  //     return getItemList();
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
-  // };
-
   useEffect(() => {
     getItems();
   }, []);
 
-  return { items, addItem, updateItem, removeItem };
+  return { items, addItem, saveItem, removeItem };
 };

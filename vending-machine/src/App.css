@@ -1,6 +1,12 @@
-button {cursor: pointer;}
-h2 {color: #666;}
-a {text-decoration: none;}
+button {
+  cursor: pointer;
+}
+h2 {
+  color: #666;
+}
+a {
+  text-decoration: none;
+}
 
 .App {
   text-align: center;
@@ -33,7 +39,7 @@ a {text-decoration: none;}
   box-sizing: border-box;
   box-shadow: 5px 5px 5px 5px rgba(161, 161, 161, 0.263) inset;
 }
-.App-page{
+.App-page {
   width: 500px;
   height: 550px;
   border: 5px solid #ffffff;
@@ -59,7 +65,7 @@ a {text-decoration: none;}
   height: 100%;
 }
 .body-left {
-  width: 60%;  
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,7 +82,7 @@ a {text-decoration: none;}
 }
 
 /* 왼쪽 */
-.item-display{
+.item-display {
   width: 100%;
   height: 85%;
   padding: 10px 5px;
@@ -86,7 +92,7 @@ a {text-decoration: none;}
   background-color: rgb(218, 218, 218);
   box-shadow: 5px 5px 5px 5px rgba(161, 161, 161, 0.714) inset;
 }
-.item-box{
+.item-box {
   width: 50%;
   height: 25%;
   float: left;
@@ -104,7 +110,7 @@ a {text-decoration: none;}
   box-shadow: 5px 5px 5px rgb(161, 161, 161);
 }
 .sold-out {
-  width:100px;
+  width: 100px;
   height: 25px;
   color: #fff;
   font-size: 18px;
@@ -113,7 +119,7 @@ a {text-decoration: none;}
   position: absolute;
   top: 15px;
   left: 20px;
-  opacity:0;
+  opacity: 0;
   transform: rotate(20deg);
   z-index: 80;
   background-color: #ff0000b6;
@@ -131,7 +137,7 @@ a {text-decoration: none;}
   color: #666;
   background-color: #ffffff;
 }
-.item-price{
+.item-price {
   width: 35px;
   height: 18px;
   line-height: 18px;
@@ -144,7 +150,7 @@ a {text-decoration: none;}
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
 }
-.buy-btn{
+.buy-btn {
   width: 65%;
   height: 23%;
   line-height: 100%;
@@ -195,7 +201,7 @@ a {text-decoration: none;}
   box-sizing: border-box;
   box-shadow: 5px 5px 5px rgba(161, 161, 161, 0.714) inset;
 }
-.total-num{
+.total-num {
   color: #7786c5;
   font-size: 38px;
   float: right;
@@ -229,7 +235,7 @@ a {text-decoration: none;}
 .return-coin-btn:hover {
   background-color: rgb(186, 186, 186);
 }
-.get-item-box{
+.get-item-box {
   width: 100%;
   height: 80px;
   border-radius: 10px;
@@ -280,15 +286,15 @@ a {text-decoration: none;}
 .inventory {
   width: 380px;
   height: 75px;
-  overflow:auto;
+  overflow: auto;
   white-space: nowrap;
   border: 4px solid #d0d5ff;
-  border-radius:10px;
+  border-radius: 10px;
   box-sizing: border-box;
   background-color: #f1f1f1;
   box-shadow: 3px 3px 5px 2px rgba(113, 113, 113, 0.408) inset;
 }
-.my-item{
+.my-item {
   width: 60px;
   height: 60px;
   display: inline-block;
@@ -310,7 +316,7 @@ a {text-decoration: none;}
   display: none;
   box-shadow: 3px 3px 5px 2px rgba(161, 161, 161, 0.662);
 }
-.user-coin-btn{
+.user-coin-btn {
   width: 50px;
   height: 50px;
   float: left;
@@ -340,6 +346,32 @@ a {text-decoration: none;}
   font-size: 12px;
 }
 
+/* 체크 모달 */
+.check-modal {
+  width: 250px;
+  z-index: 900;
+  top: 300px;
+margin: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  position: absolute;
+  background-color: #ffffff;
+}
+.check-modal-message {
+  width: 80%;
+  height: 40px;
+  margin: auto;
+  line-height: 40px;
+}
+.check-modal-but-box {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* 매니저페이지 */
 #manager-page {
   height: 100%;
   color: #666;
@@ -347,88 +379,88 @@ a {text-decoration: none;}
   box-sizing: border-box;
   background-color: rgb(227, 239, 237);
 }
-.manager-page-title{
+.manager-page-title {
   width: 100%;
-  height: 30px;
-  font-size: 25px;
+  height: 20px;
+  font-size: 22px;
   float: left;
+  margin-bottom: 25px;
 }
 .manager-page-setting {
-  width: 50%;
-  height: 350px;
-  font-size: 15px;
-  float: left;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
   display: flex;
-  box-sizing: border-box;
-  flex-direction: column;
-  justify-content:center;
+  justify-content: center;
+  align-items: center;
 }
-
+.add-item-input {
+  width: 60px;
+  margin: 0 5px;
+}
 .manager-input {
-  color: #333;
   width: 100px;
-  height: 35px;
-  padding: 0 10px; 
-  margin: 10px;
-  font-size: 15px;
+  height: 25px;
+  padding: 0 10px;
+  margin: 3px;
+  font-size: 14px;
   border-radius: 5px;
-  border: 2px solid #9a9a9a;
+  color: #333;
+  border-style: none;
   box-sizing: border-box;
+  background-color: #ffe1aec7;
 }
-.manager-img{
+/* .manager-img{
   width: 155px;
   height: 35px;
   font-size: 11px;
   padding: 0 10px; 
   margin: 10px;
   box-sizing: border-box;
-}
+} */
 
 .manager-item-list {
-  width: 50%;
-  height: 330px;
-  margin-top: 20px;
-  padding: 5px;
-  float: left;
+  padding: 3px;
   border-radius: 10px;
   font-size: 15px;
   box-sizing: border-box;
-  overflow: auto;
   background-color: #ddbcbc;
 }
+.manager-item-table {
+  height: 320px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+}
 .manager-item-list th {
-  width: 50px;
-  height: 15px;
-  line-height: 15px;
   border-radius: 5px;
-  background-color: #e5e5e588;
 }
-.item-list{
-  height: 20px;
+.manager-item-list td {
+  border-radius: 5px;
+}
+.item-list {
   background-color: #fff7f7;
-  cursor: pointer;
 }
-.item-list:hover{
-  font-weight: bold;
-  transform: scale( 1.1, 1.1 );
-  transition: .5s;
+.item-list:hover {
+  transition: 0.5s;
 }
 
-.manager-btn-box{
+.manager-btn-box {
   width: 100%;
-  height: 10%;
-  margin-top: 35px;
+  margin: 10px 0;
   float: left;
   display: flex;
   justify-content: space-evenly;
 }
 
 .manager-btn {
-  width: 30%;
-  height: 35px;
+  width: 90px;
+  height: 30px;
   color: #666;
-  font-size: 18px;
-  line-height: 30px;
+  font-size: 15px;
+  line-height: 26px;
   background-color: #fff4c4;
   border-radius: 5px;
   border: 2px solid #9c8b8b;
@@ -436,34 +468,14 @@ a {text-decoration: none;}
   cursor: pointer;
 }
 .manager-btn:hover {
-  background-color: rgba(255, 216, 162, 0.906)
+  background-color: rgba(255, 216, 162, 0.906);
 }
-.manager-home-btn{
-  background-color: #d0e1f0;
-}
-.manager-home-btn:hover {
-  background-color: rgba(182, 202, 214, 0.906)
-}
-.form-btn-box {
-  height: 30px;
-  margin-top: 15px;
-  position: relative;
-}
-.form-btn {
-  position: absolute;
-  width: 60px;
-  height: 30px;
-}
-.form-btn-01{
+.add-item-box {
   width: 100px;
-  left: 65px;
+  display: flex;
+  justify-content: space-evenly;
 }
-.form-btn-02{
-  left: 50px;
-}
-.form-btn-03{
-  left: 120px;
-}
+
 .form-warning-message {
   position: absolute;
   color: red;

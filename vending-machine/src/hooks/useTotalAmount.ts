@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { readTotalAmount, saveTotalAmount } from '../services/totalAmount';
 
-export const useTotal = () => {
-  const [totalAmount, setTotalAmount] = useState();
+export const useTotalAmount = () => {
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const getTotalAmount = async () => {
     try {
