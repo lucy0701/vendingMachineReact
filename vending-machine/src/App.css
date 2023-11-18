@@ -350,8 +350,8 @@ a {
 .check-modal {
   width: 250px;
   z-index: 900;
-  top: 300px;
-margin: auto;
+  top: 200px;
+  left: 120px;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 5px;
@@ -378,21 +378,23 @@ margin: auto;
   padding: 0 30px;
   box-sizing: border-box;
   background-color: rgb(227, 239, 237);
+  position: relative;
 }
 .manager-page-title {
   width: 100%;
-  height: 20px;
+  height: 40px;
   font-size: 22px;
   float: left;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 .manager-page-setting {
   width: 100%;
-  height: 40px;
+  height: 20px;
   font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 15px;
 }
 .add-item-input {
   width: 60px;
@@ -400,9 +402,9 @@ margin: auto;
 }
 .manager-input {
   width: 100px;
-  height: 25px;
+  height: 20px;
   padding: 0 10px;
-  margin: 3px;
+  margin: 4px;
   font-size: 14px;
   border-radius: 5px;
   color: #333;
@@ -420,19 +422,19 @@ margin: auto;
 } */
 
 .manager-item-list {
-  padding: 3px;
+  padding: 5px;
   border-radius: 10px;
   font-size: 15px;
   box-sizing: border-box;
   background-color: #ddbcbc;
 }
 .manager-item-table {
-  height: 320px;
-  margin: 15px 0;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow-x: auto;
+  margin-bottom: 10px;
 }
 .manager-item-list th {
   border-radius: 5px;
@@ -446,10 +448,16 @@ margin: auto;
 .item-list:hover {
   transition: 0.5s;
 }
-
+.manager-inpo-message{
+  height: 20px;
+  margin: 10px;
+  font-size: 15px;
+  color: rgb(255, 0, 0);
+}
 .manager-btn-box {
   width: 100%;
-  margin: 10px 0;
+  margin-top: 15px;
+  /* margin: 10px 0; */
   float: left;
   display: flex;
   justify-content: space-evenly;
@@ -470,12 +478,22 @@ margin: auto;
 .manager-btn:hover {
   background-color: rgba(255, 216, 162, 0.906);
 }
-.add-item-box {
-  width: 100px;
+
+.add-item-btn-box01 {
+  width: 220px;
+  display: flex;
+  position: absolute;
+  right: 50px;
+  justify-content: space-between;
+}
+.add-item-btn-box02 {
+  width: 80px;
   display: flex;
   justify-content: space-evenly;
 }
-
+.item-btn{
+  width:100px;
+}
 .form-warning-message {
   position: absolute;
   color: red;

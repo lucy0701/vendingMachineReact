@@ -4,7 +4,6 @@ import React from 'react';
 interface CheckModalProps {
   modalMessage: string;
   isShow: boolean;
-  isDisabled: boolean;
   onClickModalCheckBtn: () => void;
   onClickModalBtn: () => void;
 }
@@ -14,7 +13,6 @@ const CheckModal: React.FC<CheckModalProps> = ({
   isShow,
   onClickModalCheckBtn,
   onClickModalBtn,
-  isDisabled
 }) => {
 
   return (
@@ -25,7 +23,6 @@ const CheckModal: React.FC<CheckModalProps> = ({
           type="button"
           className="check-btn check-moda"
           onClick={onClickModalCheckBtn}
-          disabled = {isDisabled ? true:false}
         >
           확인
         </button>

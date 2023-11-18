@@ -4,26 +4,38 @@ import { formatPrice } from '../utils/number';
 
 interface ItemTableProps {
   getItemList: Item[];
+  maxMum: {
+    price: number;
+    stock: number;
+  };
+  // eslint-disable-next-line no-unused-vars
   onClickDeleteItem: (item: Item) => void;
-  handleDeleteItem: () => void;
-  onChangeInput: (
+  onChangeNumberInput: (
+    // eslint-disable-next-line no-unused-vars
     e: React.ChangeEvent<HTMLInputElement>,
+    // eslint-disable-next-line no-unused-vars
     key: keyof Item,
+    // eslint-disable-next-line no-unused-vars
     index: number,
+    // eslint-disable-next-line no-unused-vars
     maxMum: number,
   ) => void;
   onChangeTextInput: (
+    // eslint-disable-next-line no-unused-vars
     e: React.ChangeEvent<HTMLInputElement>,
+    // eslint-disable-next-line no-unused-vars
     key: keyof Item,
+    // eslint-disable-next-line no-unused-vars
     index: number,
   ) => void;
 }
 
 const ItemTable: React.FC<ItemTableProps> = ({
   getItemList,
+  maxMum,
   onClickDeleteItem,
   onChangeTextInput,
-  onChangeInput,
+  onChangeNumberInput,
 }) => {
   const [selectedTarget, setSelectedTarget] = useState<HTMLElement | null>(
     null,
@@ -74,7 +86,7 @@ const ItemTable: React.FC<ItemTableProps> = ({
                     className="manager-input"
                     value={formatPrice(item.price)}
                     onChange={e => {
-                      onChangeInput(e, 'price', index, 10000);
+                      onChangeNumberInput(e, 'price', index, maxMum.price);
                     }}
                   />
                 </td>
@@ -84,16 +96,12 @@ const ItemTable: React.FC<ItemTableProps> = ({
                     className="manager-input"
                     value={formatPrice(item.stock)}
                     onChange={e => {
-                      onChangeInput(e, 'stock', index, 2000);
+                      onChangeNumberInput(e, 'stock', index, maxMum.stock);
                     }}
                   />
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    onClick={() => onClickDeleteItem(item)}
-                    // onClick={handleDeleteItem}
-                  >
+                  <button type="button" onClick={() => onClickDeleteItem(item)}>
                     삭제
                   </button>
                 </td>

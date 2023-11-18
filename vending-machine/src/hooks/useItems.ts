@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { readItems, createItem, updateItem, deleteItem } from '../services/item';
+import {
+  readItems,
+  createItem,
+  updateItem,
+  deleteItem,
+} from '../services/item';
 import { Item } from '../types/item';
 
 export const useItems = () => {
@@ -56,5 +61,11 @@ export const useItems = () => {
     getItems();
   }, []);
 
-  return { items, addItem, saveItem, removeItem };
+  return {
+    refreshItems: getItems,
+    items,
+    addItem,
+    saveItem,
+    removeItem,
+  };
 };

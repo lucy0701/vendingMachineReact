@@ -17,8 +17,9 @@ export default function ManagerPage() {
   // 초기화 버튼
   // 전역 상태관리 나중에 적용
 
-  const { saveItem, items, addItem, removeItem } = useItems();
+  const { items, refreshItems, saveItem, addItem, removeItem } = useItems();
   const getItemList = [...items];
+
   const [selectItem, setSelectItem] = useState<Item>({
     id: 0,
     itemName: '',
@@ -26,28 +27,41 @@ export default function ManagerPage() {
     stock: 0,
     url: '',
   });
-  const [isOpen, setIsOpen] = useState(false);
-  const [isShow, setIsShow] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [updateItems, setUpdateItems] = useState<Item[]>([]);
+
+  const [isToggleOpen, setIsOpen] = useState(false);
+  const [isModalPop, setIsModalPop] = useState(false);
+
   const [modalMessage, setModalMessage] = useState('');
+  const [modalEvent, setModalEvent] = useState<() => void | null>(() => null);
+  const [inpoMessage, setInpoMessage] = useState('');
+  const maxMum = {
+    price: 1000,
+    stock: 20,
+  }
 
-
-
-  const toggleModal = (message: string, isDisabled: boolean) => {
-    setIsDisabled(isDisabled);
+  const setModal = (message: string, onClickEvent: () => void) => {
     setModalMessage(message);
+    setModalEvent(() => onClickEvent);
     onClickModalBtn();
   };
 
   const onClickModalBtn = () => {
-    setIsShow(!isShow);
+    setIsModalPop(!isModalPop);
   };
 
   const onClickToggleBtn = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isToggleOpen);
   };
 
-  const onClickAddItem = () => {
+  const onClickModalCheckBtn = () => {
+    if (modalEvent !== undefined && modalEvent !== null) {
+      modalEvent();
+      onClickModalBtn();
+    }
+  };
+
+  const handleAddItem = () => {
     if (
       items.length < 8 &&
       selectItem.price > 0 &&
@@ -55,54 +69,82 @@ export default function ManagerPage() {
       selectItem.itemName !== null
     ) {
       addItem(selectItem);
-      onClickModalBtn();
       setSelectItem({ id: 0, itemName: '', price: 0, stock: 0, url: '' });
     }
   };
-
-  const onClickDeleteItem = (item: Item) => {
+  const handleSaveItem = () => {
+    updateItems.forEach(item => {
+      saveItem(item);
+    });
+  };
+  const handleDeleteItem = (item: Item) => {
     removeItem(item);
   };
 
-  const handleAddItem = () => {
-    if (items.length >= 8) {
-      toggleModal('최대 8개까지 등록이 가능', true);
-    } else if (selectItem.itemName === null) {
-      toggleModal('이름을 입력하세요', true);
-    } else if (selectItem.price <= 0 && selectItem.stock <= 0) {
-      toggleModal('아이템과 재고는 0이상 입력', true);
-    } else {
-      toggleModal('아이템을 추가 하시겠습니까?', false);
-    }
-  };
-  const handleDeleteItem = () => {
-    toggleModal('삭제 하시겠습니까?', false);
-  };
-
-  const onChangeUpdateInput = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: string,
-    maxMum: number,
-  ) => {
-    const num = Number(e.target.value.replaceAll(',', ''));
-    if (!Number.isInteger(num) || (Number.isInteger(num) && num > maxMum)) {
-      e.preventDefault();
-      return;
-    }
-    setSelectItem(prev => ({
-      ...prev,
-      [key]: formatPrice(num),
-    }));
-  };
-
-  const [updateItems, setUpdateItems] = useState<Item[]>([]);
   const updateItmeList = (index: number) => {
     setUpdateItems(updateItems => [
       ...updateItems.filter(item => item.id !== getItemList[index].id),
       getItemList[index],
     ]);
   };
-  const onChangeInput = (
+
+  const onClickAddItem = () => {
+    if (items.length >= 8) {
+      setModal('최대 8개까지 등록이 가능', () => handleAddItem());
+    } else if (
+      selectItem.itemName === null ||
+      selectItem.price <= 0 ||
+      selectItem.stock <= 0
+    ) {
+      setModal('작성하지 않은 칸 있음', () => handleAddItem());
+    } else {
+      setModal('아이템을 추가 하시겠습니까?', () => handleAddItem());
+    }
+  };
+
+  const onClickSaveItem = () => {
+    setModal('저장 하시겠습니까?', () => handleSaveItem());
+  };
+
+  const onClickDeleteItem = (item: Item) => {
+    setModal('삭제 하시겠습니까?', () => handleDeleteItem(item));
+  };
+
+  const onClickItemInit = () => {
+    return refreshItems();
+  };
+
+  const changeUpdateItemList = (
+    key: keyof Item,
+    index: number,
+    itemValue: string | number,
+  ) => {
+    (getItemList[index][key] as string | number) = itemValue;
+    updateItmeList(index);
+  };
+
+  const onChangeUpdateInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    key: keyof Item,
+    maxMum: number,
+  ) => {
+    const num = Number(e.target.value.replaceAll(',', ''));
+    if (!Number.isInteger(num) || (Number.isInteger(num) && num > maxMum)) {
+      e.preventDefault();
+      setInpoMessage(
+        `${selectItem.itemName}(이)의 ${key}는 ${maxMum} 이하로 입력해 주세요`,
+      );
+      return;
+    }
+
+    setSelectItem(prev => ({
+      ...prev,
+      [key]: formatPrice(num),
+    }));
+    setInpoMessage('');
+  };
+
+  const onChangeNumberInput = (
     e: React.ChangeEvent<HTMLInputElement>,
     key: keyof Item,
     index: number,
@@ -112,10 +154,13 @@ export default function ManagerPage() {
 
     if (!Number.isInteger(num) || (Number.isInteger(num) && num > maxMum)) {
       e.preventDefault();
+      setInpoMessage(
+        `${getItemList[index].itemName}(이)의 ${key}는 ${maxMum} 이하로 입력해 주세요`,
+      );
       return;
     }
-    (getItemList as any)[index][key] = num;
-    updateItmeList(index);
+    changeUpdateItemList(key, index, num);
+    setInpoMessage('');
   };
 
   const onChangeTextInput = (
@@ -123,16 +168,8 @@ export default function ManagerPage() {
     key: keyof Item,
     index: number,
   ) => {
-    
     const name = e.currentTarget.value;
-    (getItemList as any)[index][key] = name;
-    updateItmeList(index);
-  };
-
-  const onClickSaveItem = () => {
-    updateItems.forEach(item => {
-      saveItem(item);
-    });
+    changeUpdateItemList(key, index, name);
   };
 
   return (
@@ -140,7 +177,7 @@ export default function ManagerPage() {
       <h2 className="manager-page-title">관리자 페이지</h2>
 
       <div className="manager-page-setting">
-        <div style={{ visibility: isOpen ? 'visible' : 'hidden' }}>
+        <div style={{ visibility: isToggleOpen ? 'visible' : 'hidden' }}>
           <label>
             이름
             <input
@@ -163,7 +200,7 @@ export default function ManagerPage() {
               className="add-item-input"
               value={selectItem.price}
               onChange={e => {
-                onChangeUpdateInput(e, 'price', 10000);
+                onChangeUpdateInput(e, 'price', maxMum.price);
               }}
             />
           </label>
@@ -175,44 +212,57 @@ export default function ManagerPage() {
               className="add-item-input"
               value={selectItem.stock}
               onChange={e => {
-                onChangeUpdateInput(e, 'stock', 2000);
+                onChangeUpdateInput(e, 'stock', maxMum.stock);
               }}
             />
           </label>
         </div>
-        <div className="add-item-box">
+
+        <div className="add-item-btn-box01">
           <button
             type="button"
-            className="add-item-btn"
-            style={{ display: isOpen ? 'none' : 'block' }}
+            className="add-item-btn item-btn"
+            style={{ display: isToggleOpen ? 'none' : 'block' }}
+            onClick={onClickItemInit}
+          >
+            수정 전
+          </button>
+          <button
+            type="button"
+            className="init-item-btn item-btn"
+            style={{ display: isToggleOpen ? 'none' : 'block' }}
             onClick={onClickToggleBtn}
           >
             아이템 추가
           </button>
+        </div>
+
+        <div className="add-item-btn-box02">
           <button
             type="button"
-            className="add-item-btn"
-            style={{ display: isOpen ? 'block' : 'none' }}
-            onClick={() => handleAddItem()}
+            className="check-add-item-btn"
+            style={{ display: isToggleOpen ? 'block' : 'none' }}
+            onClick={onClickAddItem}
           >
             추가
           </button>
           <button
             type="button"
-            className="add-item-btn"
-            style={{ display: isOpen ? 'block' : 'none' }}
+            className="cancel-add-item-btn"
+            style={{ display: isToggleOpen ? 'block' : 'none' }}
             onClick={onClickToggleBtn}
           >
             취소
           </button>
         </div>
       </div>
+      <p className="manager-inpo-message">{inpoMessage}</p>
       <ItemTable
         getItemList={getItemList}
         onClickDeleteItem={onClickDeleteItem}
-        handleDeleteItem={handleDeleteItem}
         onChangeTextInput={onChangeTextInput}
-        onChangeInput={onChangeInput}
+        onChangeNumberInput={onChangeNumberInput}
+        maxMum={maxMum}
       />
       <div className="manager-btn-box">
         <Link to="/" className="manager-btn">
@@ -229,10 +279,9 @@ export default function ManagerPage() {
       </div>
       <CheckModal
         modalMessage={modalMessage}
-        isShow={isShow}
-        onClickModalCheckBtn={onClickAddItem}
+        isShow={isModalPop}
+        onClickModalCheckBtn={onClickModalCheckBtn}
         onClickModalBtn={onClickModalBtn}
-        isDisabled={isDisabled}
       />
     </form>
   );
