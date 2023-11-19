@@ -1,5 +1,5 @@
 export interface Item {
-  id: number;
+  id: boolean;
   itemName: string;
   price: number;
   stock: number;
