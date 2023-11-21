@@ -3,6 +3,7 @@ import { formatPrice } from '../utils/number';
 import { Item } from '../types/item';
 
 const ItemBox: React.FC<{item:Item}> = ( {item} ) => {
+  
   return (
     <div className="item-box">
       <div className="item-image">

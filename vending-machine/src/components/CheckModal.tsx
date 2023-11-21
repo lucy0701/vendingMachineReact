@@ -14,25 +14,31 @@ const CheckModal: React.FC<CheckModalProps> = ({
   onClickModalCheckBtn,
   onClickModalBtn,
 }) => {
-
   return (
-    <div className="check-modal" style={{ display: isShow ? 'block' : 'none' }}>
-      <div className="check-modal-message">{modalMessage}</div>
-      <div className="check-modal-but-box">
-        <button
-          type="button"
-          className="check-btn check-moda"
-          onClick={onClickModalCheckBtn}
-        >
-          확인
-        </button>
-        <button
-          type="button"
-          className="cancel-btn check-moda"
-          onClick={onClickModalBtn}
-        >
-          취소
-        </button>
+    <div className="modal-box" style={{ display: isShow ? 'block' : 'none' }}>
+      <div
+        className="check-modal"
+        style={{ display: isShow ? 'block' : 'none' }}
+      >
+        <div className="check-modal-message" style={{ whiteSpace: 'pre-line' }}>
+          {modalMessage}
+        </div>
+        <div className="check-modal-but-box">
+          <button
+            type="button"
+            className="check-btn check-moda"
+            onClick={onClickModalCheckBtn}
+          >
+            확인
+          </button>
+          <button
+            type="button"
+            className="cancel-btn check-moda"
+            onClick={onClickModalBtn}
+          >
+            취소
+          </button>
+        </div>
       </div>
     </div>
   );

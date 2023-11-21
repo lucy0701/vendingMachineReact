@@ -348,27 +348,35 @@ a {
 
 /* 체크 모달 */
 .check-modal {
-  width: 250px;
-  z-index: 900;
-  top: 200px;
-  left: 120px;
+  width: 300px;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 5px;
   position: absolute;
+  top: 250px;
+  left: 270px;
   background-color: #ffffff;
 }
 .check-modal-message {
   width: 80%;
-  height: 40px;
   margin: auto;
-  line-height: 40px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 .check-modal-but-box {
   width: 100%;
   margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
+  z-index: 900;
+}
+.modal-box {
+  position: absolute;
+  width: 800px;
+  height: 600px;
+  top: -25px;
+  left: -150px;
+  background-color: #333333b6;
 }
 
 /* 매니저페이지 */
@@ -448,7 +456,7 @@ a {
 .item-list:hover {
   transition: 0.5s;
 }
-.manager-inpo-message{
+.manager-inpo-message {
   height: 20px;
   margin: 10px;
   font-size: 15px;
@@ -491,8 +499,8 @@ a {
   display: flex;
   justify-content: space-evenly;
 }
-.item-btn{
-  width:100px;
+.item-btn {
+  width: 100px;
 }
 .form-warning-message {
   position: absolute;

@@ -80,23 +80,65 @@
     {
       "id": 4,
       "itemName": "재희",
-      "price": 95,
+      "price": 9512,
       "stock": 10,
       "url": "/src_assets/img10.png"
     },
     {
       "id": 5,
-      "itemName": "번",
-      "price": 18,
+      "itemName": "번123",
+      "price": 1,
       "stock": 10,
       "url": "/src_assets/img14.png"
     },
     {
       "id": 6,
-      "itemName": "승목",
-      "price": 1000,
-      "stock": 10,
-      "url": "/src_assets/img15.png"
+      "itemName": "qwe",
+      "price": 3123,
+      "stock": 123,
+      "url": "",
+      "item": {
+        "id": 0,
+        "itemName": "",
+        "price": 3123,
+        "stock": 123,
+        "url": "",
+        "item": {
+          "id": 0,
+          "itemName": "",
+          "price": 3123,
+          "stock": 12,
+          "url": "",
+          "item": {
+            "id": 0,
+            "itemName": "",
+            "price": 3123,
+            "stock": 1,
+            "url": "",
+            "item": {
+              "id": 0,
+              "itemName": "",
+              "price": 3123,
+              "stock": 0,
+              "url": "",
+              "item": {
+                "id": 0,
+                "itemName": "",
+                "price": 312,
+                "stock": 0,
+                "url": "",
+                "item": {
+                  "id": 0,
+                  "itemName": "",
+                  "price": 31,
+                  "stock": 0,
+                  "url": ""
+                }
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "default-items": [
@@ -148,6 +190,13 @@
       "price": 1000,
       "stock": 10,
       "url": "/src_assets/img15.png"
+    },
+    {
+      "id": 7,
+      "itemName": "죽순",
+      "price": 500,
+      "stock": 10,
+      "url": "/src_assets/img16.png"
     },
     {
       "id": 7,
