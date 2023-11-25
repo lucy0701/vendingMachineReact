@@ -1,49 +1,60 @@
 {
-  "total-amount": [
-    {
-      "total": 0
-    }
-  ],
+  "total-amount": {
+    "total": 15
+  },
+  "total-amount2": {
+    "total": 0
+  },
   "user-coins": [
     {
+      "id": 0,
       "coin": "1",
       "count": 10
     },
     {
+      "id": 1,
       "coin": "5",
-      "count": 10
+      "count": 9
     },
     {
+      "id": 2,
       "coin": "10",
-      "count": 10
+      "count": 9
     },
     {
+      "id": 3,
       "coin": "50",
       "count": 10
     },
     {
+      "id": 4,
       "coin": "100",
       "count": 10
     }
   ],
   "machine-coins": [
     {
+      "id": 0,
       "coin": "1",
       "count": 10
     },
     {
+      "id": 1,
       "coin": "5",
       "count": 10
     },
     {
+      "id": 2,
       "coin": "10",
       "count": 10
     },
     {
+      "id": 3,
       "coin": "50",
       "count": 10
     },
     {
+      "id": 4,
       "coin": "100",
       "count": 10
     }
@@ -80,65 +91,30 @@
     {
       "id": 4,
       "itemName": "재희",
-      "price": 9512,
+      "price": 95,
       "stock": 10,
       "url": "/src_assets/img10.png"
     },
     {
       "id": 5,
-      "itemName": "번123",
-      "price": 1,
+      "itemName": "번",
+      "price": 18,
       "stock": 10,
       "url": "/src_assets/img14.png"
     },
     {
       "id": 6,
-      "itemName": "qwe",
-      "price": 3123,
-      "stock": 123,
-      "url": "",
-      "item": {
-        "id": 0,
-        "itemName": "",
-        "price": 3123,
-        "stock": 123,
-        "url": "",
-        "item": {
-          "id": 0,
-          "itemName": "",
-          "price": 3123,
-          "stock": 12,
-          "url": "",
-          "item": {
-            "id": 0,
-            "itemName": "",
-            "price": 3123,
-            "stock": 1,
-            "url": "",
-            "item": {
-              "id": 0,
-              "itemName": "",
-              "price": 3123,
-              "stock": 0,
-              "url": "",
-              "item": {
-                "id": 0,
-                "itemName": "",
-                "price": 312,
-                "stock": 0,
-                "url": "",
-                "item": {
-                  "id": 0,
-                  "itemName": "",
-                  "price": 31,
-                  "stock": 0,
-                  "url": ""
-                }
-              }
-            }
-          }
-        }
-      }
+      "itemName": "승목",
+      "price": 1000,
+      "stock": 10,
+      "url": "/src_assets/img15.png"
+    },
+    {
+      "id": 7,
+      "itemName": "죽순",
+      "price": 500,
+      "stock": 11,
+      "url": "/src_assets/img16.png"
     }
   ],
   "default-items": [
@@ -197,13 +173,6 @@
       "price": 500,
       "stock": 10,
       "url": "/src_assets/img16.png"
-    },
-    {
-      "id": 7,
-      "itemName": "죽순",
-      "price": 500,
-      "stock": 10,
-      "url": "/src_assets/img16.png"
     }
   ],
   "myitem-list": [
@@ -214,22 +183,27 @@
   ],
   "insert-coins": [
     {
+      "id": 0,
       "coin": "1",
       "count": 0
     },
     {
+      "id": 1,
       "coin": "5",
-      "count": 0
+      "count": 1
     },
     {
+      "id": 2,
       "coin": "10",
-      "count": 0
+      "count": 1
     },
     {
+      "id": 3,
       "coin": "50",
       "count": 0
     },
     {
+      "id": 4,
       "coin": "100",
       "count": 0
     }

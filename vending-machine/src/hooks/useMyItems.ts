@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   readMyItemList,
   createMyItemList,
-  saveMyItemList,
+  updateMyItem,
   deleteMyItemList,
 } from '../services/myItemList';
 import { Item } from '../types/item';
@@ -33,10 +33,10 @@ export const useMyItems = () => {
     }
   };
 
-  const updateMyItem = async (updateMyItem: Item) => {
-    const { id } = updateMyItem;
+  const saveMyItemList = async (saveMyItemList: Item) => {
+    const { id } = saveMyItemList;
     try {
-      const response = await saveMyItemList(id);
+      const response = await updateMyItem(id,saveMyItemList);
       if (response) {
         return getMyItems();
       }
@@ -48,7 +48,7 @@ export const useMyItems = () => {
   const removeMyItem = async (removeMyItem: Item) => {
     const { id } = removeMyItem;
     try {
-      const response = await deleteMyItemList(id);
+      const response = await deleteMyItemList(id,removeMyItem);
       if (response) {
         return getMyItems();
       }
@@ -61,5 +61,5 @@ export const useMyItems = () => {
     getMyItems();
   }, []);
 
-  return { myItems, addMyItem, updateMyItem, removeMyItem };
+  return { myItems, addMyItem, saveMyItemList, removeMyItem };
 };

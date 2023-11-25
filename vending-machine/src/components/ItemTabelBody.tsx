@@ -8,7 +8,7 @@ interface ItemTabelBodyPorps {
   onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePrice: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeStock: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClickButton: () => void;
+  onClickButton: (e: React.MouseEvent) => void;
   onClickTabelTr: (e: React.MouseEvent) => void;
 }
 const ItemTabelBody = ({
@@ -33,6 +33,7 @@ const ItemTabelBody = ({
         <input
           type="text"
           className="manager-input"
+          name='manager-input'
           value={item.itemName}
           placeholder={item.itemName}
           onChange={onChangeName}
@@ -42,6 +43,7 @@ const ItemTabelBody = ({
         <input
           type="text"
           className="manager-input"
+          name='manager-input'
           value={formatPrice(item.price)}
           placeholder={formatPrice(item.price)}
           onChange={onChangePrice}
@@ -51,6 +53,7 @@ const ItemTabelBody = ({
         <input
           type="text"
           className="manager-input"
+          name='manager-input'
           value={formatPrice(item.stock)}
           placeholder={formatPrice(item.stock)}
           onChange={onChangeStock}

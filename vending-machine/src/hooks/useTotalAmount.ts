@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { readTotalAmount, saveTotalAmount } from '../services/totalAmount';
+import { useEffect, useState } from 'react';
+import { readTotalAmount, updateTotalAmount } from '../services/totalAmount';
+import { TotalAmount } from '../types/totalAmount';
 
 export const useTotalAmount = () => {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -8,16 +9,16 @@ export const useTotalAmount = () => {
     try {
       const response = await readTotalAmount();
       if (response) {
-        setTotalAmount(response.data);
+        setTotalAmount(response.data.total);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const upateTotalAmount = async (updateTotalAmount: number) => {
+  const saveTotalAmount = async (saveTotalAmount: TotalAmount) => {
     try {
-      const response = await saveTotalAmount(updateTotalAmount);
+      const response = await updateTotalAmount(saveTotalAmount);
       if (response) {
         return getTotalAmount();
       }
@@ -25,6 +26,8 @@ export const useTotalAmount = () => {
       console.log(error);
     }
   };
-
-  return { totalAmount, upateTotalAmount };
+  useEffect(() => {
+    getTotalAmount();
+  }, []);
+  return { totalAmount, saveTotalAmount };
 };

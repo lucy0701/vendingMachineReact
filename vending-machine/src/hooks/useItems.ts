@@ -46,7 +46,6 @@ export const useItems = () => {
 
   const removeItem = async (removeItem: Item) => {
     const { id } = removeItem;
-
     try {
       const response = await deleteItem(id, removeItem);
       if (response) {

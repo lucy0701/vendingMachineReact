@@ -1,4 +1,5 @@
 export interface Coin {
-    coin: string;
-    count: number;
-  }
+  id: number;
+  coin: string;
+  count: number;
+}

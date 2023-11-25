@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   readUserCoins,
-  createUserCoin,
-  saveUserCoin,
-  deleteUserCoin,
+  updateUserCoin,
 } from '../services/userCoin';
 import { Coin } from '../types/coin';
 
@@ -22,33 +20,10 @@ export const useUserCoins = () => {
     }
   };
 
-  const addUserCoin = async (addUserCoin: Coin) => {
+  const saveUserCoin = async (saveUserCoin: Coin) => {
+    const { id } = saveUserCoin;
     try {
-      const response = await createUserCoin(addUserCoin);
-      if (response) {
-        return getUserCoins();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateUserCoin = async (updateUserCoin: Coin) => {
-    const { coin } = updateUserCoin;
-    try {
-      const response = await saveUserCoin(coin);
-      if (response) {
-        return getUserCoins();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const removeUserCoin = async (removeUserCoin: Coin) => {
-    const { coin } = removeUserCoin;
-    try {
-      const response = await deleteUserCoin(coin);
+      const response = await updateUserCoin(id, saveUserCoin);
       if (response) {
         return getUserCoins();
       }
@@ -63,8 +38,6 @@ export const useUserCoins = () => {
 
   return {
     userCoins,
-    addUserCoin,
-    updateUserCoin,
-    removeUserCoin,
+    saveUserCoin,
   };
 };

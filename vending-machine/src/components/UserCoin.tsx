@@ -1,13 +1,31 @@
 import React from 'react';
 import { Coin } from '../types/coin';
 
-const UserCoin: React.FC<{ userCoin: Coin }> = ({ userCoin }) => {
+interface userCoinProps {
+  userCoin: Coin;
+  handleDragStart: (e: React.DragEvent) => void;
+  handleDragEnd: (e: React.DragEvent) => void;
+}
+
+const UserCoin: React.FC<userCoinProps> = ({
+  userCoin,
+  handleDragStart,
+  handleDragEnd,
+}) => {
   return (
     <>
-      <button className="user-coin-btn" value="">
+      <button
+        className="user-coin-btn"
+        value={userCoin.coin}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        draggable
+      >
         {userCoin.coin}
       </button>
-      <p className="user-coin-count"> {userCoin.count} </p>
+      <p className="user-coin-count">
+        {userCoin.count}
+      </p>
     </>
   );
 };

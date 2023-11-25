@@ -14,6 +14,7 @@ const CheckModal: React.FC<CheckModalProps> = ({
   onClickModalCheckBtn,
   onClickModalBtn,
 }) => {
+
   return (
     <div className="modal-box" style={{ display: isShow ? 'block' : 'none' }}>
       <div

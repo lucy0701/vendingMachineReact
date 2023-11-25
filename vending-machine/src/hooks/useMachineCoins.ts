@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   readMachineCoins,
-  createMachineCoin,
-  saveMachineCoin,
-  deleteMachineCoin,
+  updateMachineCoin,
 } from '../services/machineCoin';
 import { Coin } from '../types/coin';
 
@@ -13,7 +11,6 @@ export const useMachineCoins = () => {
   const getMachineCoins = async () => {
     try {
       const response = await readMachineCoins();
-
       if (response) {
         setMachineCoins(response.data);
       }
@@ -22,33 +19,11 @@ export const useMachineCoins = () => {
     }
   };
 
-  const addMachineCoin = async (addMachineCoin: Coin) => {
-    try {
-      const response = await createMachineCoin(addMachineCoin);
-      if (response) {
-        return getMachineCoins();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const updateMachineCoin = async (updateMachineCoin: Coin) => {
-    const { coin } = updateMachineCoin;
+  const saveMachineCoin = async (saveMachineCoin: Coin) => {
+    const { id } = saveMachineCoin;
     try {
-      const response = await saveMachineCoin(coin);
-      if (response) {
-        return getMachineCoins();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const removeMachineCoin = async (removeMachineCoin: Coin) => {
-    const { coin } = removeMachineCoin;
-    try {
-      const response = await deleteMachineCoin(coin);
+      const response = await updateMachineCoin(id,saveMachineCoin);
       if (response) {
         return getMachineCoins();
       }
@@ -63,8 +38,6 @@ export const useMachineCoins = () => {
 
   return {
     machineCoins,
-    addMachineCoin,
-    updateMachineCoin,
-    removeMachineCoin,
+    saveMachineCoin,
   };
 };
