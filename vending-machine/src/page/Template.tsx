@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
+import Inventory from '../components/Inventory';
 
 export default function Template() {
   return (
@@ -16,7 +17,7 @@ export default function Template() {
           <Link to="/" className="footer-btn">
             Home
           </Link>
-          <div className="inventory" />
+          <Inventory/>
           <Link to="/manager" className="footer-btn">
             관리자
           </Link>

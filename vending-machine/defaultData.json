@@ -1,6 +1,6 @@
 {
   "total-amount": {
-    "total": 15
+    "total": 99
   },
   "total-amount2": {
     "total": 0
@@ -9,7 +9,7 @@
     {
       "id": 0,
       "coin": "1",
-      "count": 10
+      "count": 9
     },
     {
       "id": 1,
@@ -71,7 +71,7 @@
       "id": 1,
       "itemName": "코순",
       "price": 888,
-      "stock": 10,
+      "stock": 9,
       "url": "/src_assets/img12.png"
     },
     {
@@ -85,21 +85,21 @@
       "id": 3,
       "itemName": "콩",
       "price": 20,
-      "stock": 10,
+      "stock": 48,
       "url": "/src_assets/img17.png"
     },
     {
       "id": 4,
       "itemName": "재희",
       "price": 95,
-      "stock": 10,
+      "stock": 9,
       "url": "/src_assets/img10.png"
     },
     {
       "id": 5,
       "itemName": "번",
       "price": 18,
-      "stock": 10,
+      "stock": 0,
       "url": "/src_assets/img14.png"
     },
     {
@@ -113,7 +113,7 @@
       "id": 7,
       "itemName": "죽순",
       "price": 500,
-      "stock": 11,
+      "stock": 10,
       "url": "/src_assets/img16.png"
     }
   ],
@@ -175,37 +175,48 @@
       "url": "/src_assets/img16.png"
     }
   ],
-  "myitem-list": [
+  "myitems": [
     {
-      "id": "",
-      "url": ""
+      "id": 18,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
+    },
+    {
+      "id": 19,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
+    },
+    {
+      "id": 20,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
     }
   ],
   "insert-coins": [
     {
       "id": 0,
       "coin": "1",
-      "count": 0
+      "count": 3
     },
     {
       "id": 1,
       "coin": "5",
-      "count": 1
+      "count": 11
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 1
+      "count": 8
     },
     {
       "id": 3,
       "coin": "50",
-      "count": 0
+      "count": 2
     },
     {
       "id": 4,
       "coin": "100",
-      "count": 0
+      "count": 2
     }
   ]
 }

@@ -301,7 +301,8 @@ a {
 .inventory {
   width: 380px;
   height: 75px;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   border: 4px solid #d0d5ff;
   border-radius: 10px;
@@ -309,12 +310,28 @@ a {
   background-color: #f1f1f1;
   box-shadow: 3px 3px 5px 2px rgba(113, 113, 113, 0.408) inset;
 }
+.myitem-box{
+  width: 60px;
+  height: 60px;
+  margin: 5px 10px;
+  display: inline-block;
+  position: relative;
+}
 .my-item {
   width: 60px;
   height: 60px;
-  display: inline-block;
-  margin: 5px;
+  top: 0;
+  left: 0;
+  position: absolute;
   border-radius: 50%;
+}
+.myitem-delete-btn{
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+  right: -5px;
 }
 
 /* 모달 */

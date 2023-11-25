@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import {
-  readMyItemList,
-  createMyItemList,
+  readMyItems,
+  createMyItem,
   updateMyItem,
-  deleteMyItemList,
-} from '../services/myItemList';
-import { Item } from '../types/item';
+  deleteMyItem,
+} from '../services/myItem';
+import { MyItem } from '../types/myItem';
 
 export const useMyItems = () => {
-  const [myItems, setMyItems] = useState<Item[]>([]);
+  const [myItems, setMyItems] = useState<MyItem[]>([]);
 
   const getMyItems = async () => {
     try {
-      const response = await readMyItemList();
+      const response = await readMyItems();
 
       if (response) {
         setMyItems(response.data);
@@ -22,9 +22,9 @@ export const useMyItems = () => {
     }
   };
 
-  const addMyItem = async (addMyItem: Item) => {
+  const addMyItem = async (addMyItem: MyItem) => {
     try {
-      const response = await createMyItemList(addMyItem);
+      const response = await createMyItem(addMyItem);
       if (response) {
         return getMyItems();
       }
@@ -33,10 +33,10 @@ export const useMyItems = () => {
     }
   };
 
-  const saveMyItemList = async (saveMyItemList: Item) => {
-    const { id } = saveMyItemList;
+  const saveMyItem = async (saveMyItem: MyItem) => {
+    const { id } = saveMyItem;
     try {
-      const response = await updateMyItem(id,saveMyItemList);
+      const response = await updateMyItem(id, saveMyItem);
       if (response) {
         return getMyItems();
       }
@@ -45,10 +45,10 @@ export const useMyItems = () => {
     }
   };
 
-  const removeMyItem = async (removeMyItem: Item) => {
+  const removeMyItem = async (removeMyItem: MyItem) => {
     const { id } = removeMyItem;
     try {
-      const response = await deleteMyItemList(id,removeMyItem);
+      const response = await deleteMyItem(id, removeMyItem);
       if (response) {
         return getMyItems();
       }
@@ -61,5 +61,5 @@ export const useMyItems = () => {
     getMyItems();
   }, []);
 
-  return { myItems, addMyItem, saveMyItemList, removeMyItem };
+  return { myItems, addMyItem, saveMyItem, removeMyItem };
 };

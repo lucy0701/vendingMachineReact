@@ -38,7 +38,7 @@ const ItemTable = ({
     null,
   );
 
-  const addUpdateItems = (item: Item) => {
+  const handleUpdateItems = (item: Item) => {
     setUpdateItems(prevItems => {
       const itemIndex = prevItems.findIndex(
         prevItem => prevItem.id === item.id,
@@ -175,14 +175,14 @@ const ItemTable = ({
                   buttonName="삭제"
                   item={item}
                   onChangeName={e =>
-                    onChangeTextInput(e, 'itemName', item, addUpdateItems)
+                    onChangeTextInput(e, 'itemName', item, handleUpdateItems)
                   }
                   onChangePrice={e =>
                     onChangeNumberInput(
                       e,
                       'price',
                       item,
-                      addUpdateItems,
+                      handleUpdateItems,
                       maxiMum.price,
                     )
                   }
@@ -191,7 +191,7 @@ const ItemTable = ({
                       e,
                       'stock',
                       item,
-                      addUpdateItems,
+                      handleUpdateItems,
                       maxiMum.stock,
                     )
                   }

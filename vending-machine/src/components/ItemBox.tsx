@@ -2,8 +2,31 @@ import React from 'react';
 import { formatPrice } from '../utils/number';
 import { Item } from '../types/item';
 
-const ItemBox: React.FC<{item:Item}> = ( {item} ) => {
-  
+interface ItemBoxProps {
+  item: Item;
+  totalAmount: number;
+  handleSaveTotalAmount: (updateTotalNum: number) => void;
+  handleSaveItem: (item: Item) => void;
+  handleMyItem: (name:string,imgUrl:string ) => void;
+}
+
+const ItemBox: React.FC<ItemBoxProps> = ({
+  item,
+  totalAmount,
+  handleSaveTotalAmount,
+  handleSaveItem,
+  handleMyItem,
+}) => {
+  const onClickBuyBtn = () => {
+    if (totalAmount > item.price && item.stock > 0) {
+      const updateTotalNum = totalAmount - Number(item.price) ;
+      const updateItemStock = item;
+      updateItemStock.stock -= 1;
+      handleSaveTotalAmount(updateTotalNum);
+      handleSaveItem(updateItemStock);
+      handleMyItem( item.itemName, item.url);
+    }
+  };
   return (
     <div className="item-box">
       <div className="item-image">
@@ -12,7 +35,9 @@ const ItemBox: React.FC<{item:Item}> = ( {item} ) => {
         <div className="item-stock">{item.stock}</div>
         <img className="item-img-print" src={item.url} alt={item.itemName} />
       </div>
-      <button className="buy-btn">구매</button>
+      <button className="buy-btn" onClick={onClickBuyBtn}>
+        구매
+      </button>
     </div>
   );
 };
