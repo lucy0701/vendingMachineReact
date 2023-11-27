@@ -8,13 +8,13 @@ import {
 import { Item } from '../types/item';
 
 export const useItems = () => {
-  const [items, refreshItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
 
   const getItems = async () => {
     try {
       const response = await readItems();
       if (response) {
-        refreshItems(response.data);
+        setItems(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -46,7 +46,6 @@ export const useItems = () => {
 
   const removeItem = async (removeItem: Item) => {
     const { id } = removeItem;
-
     try {
       const response = await deleteItem(id, removeItem);
       if (response) {

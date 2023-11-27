@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   readInsertCoins,
   createInsertCoin,
-  saveInsertCoin,
+  updateInsertCoin,
   deleteInsertCoin,
 } from '../services/insertCoin';
 import { Coin } from '../types/coin';
@@ -33,10 +33,10 @@ export const useInsertCoins = () => {
     }
   };
 
-  const updateInsertCoin = async (updateInsertCoin: Coin) => {
-    const { coin } = updateInsertCoin;
+  const saveInsertCoin = async (saveInsertCoin: Coin) => {
+    const { id } = saveInsertCoin;
     try {
-      const response = await saveInsertCoin(coin);
+      const response = await updateInsertCoin(id, saveInsertCoin);
       if (response) {
         return getInsertCoins();
       }
@@ -46,9 +46,9 @@ export const useInsertCoins = () => {
   };
 
   const removeInsertCoin = async (removeInsertCoin: Coin) => {
-    const { coin } = removeInsertCoin;
+    const { id } = removeInsertCoin;
     try {
-      const response = await deleteInsertCoin(coin);
+      const response = await deleteInsertCoin(id, removeInsertCoin);
       if (response) {
         return getInsertCoins();
       }
@@ -62,9 +62,10 @@ export const useInsertCoins = () => {
   }, []);
 
   return {
+    getInsertCoins,
     insertCoins,
     addInsertCoin,
-    updateInsertCoin,
+    saveInsertCoin,
     removeInsertCoin,
   };
 };

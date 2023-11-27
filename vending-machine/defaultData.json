@@ -1,50 +1,58 @@
 {
-  "total-amount": [
-    {
-      "total": 0
-    }
-  ],
+  "total-amount": {
+    "total": 0
+  },
   "user-coins": [
     {
-      "coin": "1",
-      "count": 10
+      "id": 0,
+      "coin": "100",
+      "count": 72
     },
     {
+      "id": 1,
+      "coin": "50",
+      "count": 125
+    },
+    {
+      "id": 2,
+      "coin": "10",
+      "count": 109
+    },
+    {
+      "id": 3,
       "coin": "5",
       "count": 10
     },
     {
-      "coin": "10",
-      "count": 10
-    },
-    {
-      "coin": "50",
-      "count": 10
-    },
-    {
-      "coin": "100",
+      "id": 4,
+      "coin": "1",
       "count": 10
     }
   ],
   "machine-coins": [
     {
-      "coin": "1",
-      "count": 10
+      "id": 0,
+      "coin": "100",
+      "count": 110
     },
     {
+      "id": 1,
+      "coin": "50",
+      "count": 88
+    },
+    {
+      "id": 2,
+      "coin": "10",
+      "count": 70
+    },
+    {
+      "id": 3,
       "coin": "5",
       "count": 10
     },
     {
-      "coin": "10",
-      "count": 10
-    },
-    {
-      "coin": "50",
-      "count": 10
-    },
-    {
-      "coin": "100",
+      "id": 4,
+      "coin": "1",
       "count": 10
     }
   ],
@@ -74,7 +82,7 @@
       "id": 3,
       "itemName": "콩",
       "price": 20,
-      "stock": 10,
+      "stock": 42,
       "url": "/src_assets/img17.png"
     },
     {
@@ -97,6 +105,13 @@
       "price": 1000,
       "stock": 10,
       "url": "/src_assets/img15.png"
+    },
+    {
+      "id": 7,
+      "itemName": "죽순",
+      "price": 500,
+      "stock": 10,
+      "url": "/src_assets/img16.png"
     }
   ],
   "default-items": [
@@ -157,32 +172,35 @@
       "url": "/src_assets/img16.png"
     }
   ],
-  "myitem-list": [
-    {
-      "id": "",
-      "url": ""
-    }
-  ],
+  "myitems": [],
   "insert-coins": [
     {
-      "coin": "1",
+      "id": 0,
+      "coin": "100",
       "count": 0
     },
     {
-      "coin": "5",
-      "count": 0
-    },
-    {
-      "coin": "10",
-      "count": 0
-    },
-    {
+      "id": 1,
       "coin": "50",
       "count": 0
     },
     {
-      "coin": "100",
+      "id": 2,
+      "coin": "10",
+      "count": 0
+    },
+    {
+      "id": 3,
+      "coin": "5",
+      "count": 0
+    },
+    {
+      "id": 4,
+      "coin": "1",
       "count": 0
     }
-  ]
+  ],
+  "is-purchased": {
+    "purchased": false
+  }
 }

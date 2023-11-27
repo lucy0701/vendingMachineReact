@@ -1,10 +1,12 @@
 import { Coin } from '../types/coin';
 import axios from './axios';
 
-export const readInsertCoins = () => axios.get('/insert-coin');
+export const readInsertCoins = () => axios.get('/insert-coins');
 export const createInsertCoin = (addInsertCoin: Coin) =>
-  axios.post('/insert-coin', addInsertCoin);
-export const saveInsertCoin = (insertCoinId: string) =>
-  axios.put(`/insert-coin/${insertCoinId}`);
-export const deleteInsertCoin = (insertCoinId: string) =>
-  axios.delete(`/insert-coin/${insertCoinId}`);
+  axios.post('/insert-coins', addInsertCoin);
+export const updateInsertCoin = (insertCoinId: number, saveInsertCoin: Coin) =>
+  axios.put(`/insert-coins/${insertCoinId}`, saveInsertCoin);
+export const deleteInsertCoin = (
+  insertCoinId: number,
+  removeInsertCoin: Coin,
+) => axios.delete(`/insert-coins/${insertCoinId}`, { data: removeInsertCoin });
