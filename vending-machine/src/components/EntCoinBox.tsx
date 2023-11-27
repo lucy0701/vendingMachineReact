@@ -4,20 +4,24 @@ interface EntCoinBoxPorps {
   dragInpoMessage: string;
   onClickModal: () => void;
   handleDragInpoMessage: (message: string) => void;
+  setIsDropField: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const EntCoinBox: React.FC<EntCoinBoxPorps> = ({
   dragInpoMessage,
   onClickModal,
   handleDragInpoMessage,
+  setIsDropField,
 }) => {
   const handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
     console.log('PSJ: dragEnter', e.target);
+    setIsDropField(true);
     handleDragInpoMessage('동전을 놔주세요');
   };
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
+    setIsDropField(false);
     console.log('PSJ: dragLeave', e.target);
     handleDragInpoMessage('거기말고! 여기!');
   };
@@ -25,6 +29,7 @@ const EntCoinBox: React.FC<EntCoinBoxPorps> = ({
   const handleDropOnMap = (e: React.DragEvent) => {
     e.preventDefault();
     handleDragInpoMessage('갑사합니다 :)');
+
     setTimeout(() => {
       handleDragInpoMessage('');
     }, 1000);

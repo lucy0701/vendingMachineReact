@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { readTotalAmount, updateTotalAmount } from '../services/totalAmount';
-// import { TotalAmount } from '../types/totalAmount';
 
 export const useTotalAmount = () => {
   const [totalAmount, setTotalAmount] = useState(0);

@@ -43,13 +43,13 @@ const ItemTable = ({
       const itemIndex = prevItems.findIndex(
         prevItem => prevItem.id === item.id,
       );
-      if (itemIndex === -1) {
-        return [...prevItems, item];
-      } else {
+      // if (itemIndex === -1) {
+      //   return [...prevItems, item];
+      // } else {
         const newItems = [...prevItems];
         newItems[itemIndex] = item;
         return newItems;
-      }
+      // }
     });
   };
 

@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  readUserCoins,
-  updateUserCoin,
-} from '../services/userCoin';
+import { readUserCoins, updateUserCoin } from '../services/userCoin';
 import { Coin } from '../types/coin';
 
 export const useUserCoins = () => {
@@ -19,7 +16,6 @@ export const useUserCoins = () => {
       console.log(error);
     }
   };
-
   const saveUserCoin = async (saveUserCoin: Coin) => {
     const { id } = saveUserCoin;
     try {
@@ -36,8 +32,5 @@ export const useUserCoins = () => {
     getUserCoins();
   }, []);
 
-  return {
-    userCoins,
-    saveUserCoin,
-  };
+  return { getUserCoins, userCoins, saveUserCoin };
 };

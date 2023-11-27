@@ -62,6 +62,7 @@ export const useInsertCoins = () => {
   }, []);
 
   return {
+    getInsertCoins,
     insertCoins,
     addInsertCoin,
     saveInsertCoin,

@@ -2,12 +2,12 @@ import React from 'react';
 import { MyItem } from '../types/myItem';
 
 interface GetItemBoxProps {
-  updateMyItem: MyItem;
+  createMyItem: MyItem;
   isGetItem: boolean;
   onClickMyItme: () => void;
 }
 const GetItemBox: React.FC<GetItemBoxProps> = ({
-  updateMyItem,
+  createMyItem,
   isGetItem,
   onClickMyItme,
 }) => {
@@ -15,8 +15,8 @@ const GetItemBox: React.FC<GetItemBoxProps> = ({
     <button className="get-item-box" onClick={onClickMyItme}>
       <img
         className="drop-item"
-        src={updateMyItem.url}
-        alt={updateMyItem.itemName}
+        src={createMyItem.url}
+        alt={createMyItem.itemName}
         style={{ display: isGetItem ? 'block' : 'none' }}
       />
     </button>

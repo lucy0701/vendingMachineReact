@@ -8,6 +8,7 @@ interface ItemBoxProps {
   handleSaveTotalAmount: (updateTotalNum: number) => void;
   handleSaveItem: (item: Item) => void;
   handleMyItem: (name:string,imgUrl:string ) => void;
+  handleUdateIsPurchased: (purchased: boolean) => void;
 }
 
 const ItemBox: React.FC<ItemBoxProps> = ({
@@ -16,6 +17,7 @@ const ItemBox: React.FC<ItemBoxProps> = ({
   handleSaveTotalAmount,
   handleSaveItem,
   handleMyItem,
+  handleUdateIsPurchased,
 }) => {
   const onClickBuyBtn = () => {
     if (totalAmount > item.price && item.stock > 0) {
@@ -25,6 +27,7 @@ const ItemBox: React.FC<ItemBoxProps> = ({
       handleSaveTotalAmount(updateTotalNum);
       handleSaveItem(updateItemStock);
       handleMyItem( item.itemName, item.url);
+      handleUdateIsPurchased(true);
     }
   };
   return (

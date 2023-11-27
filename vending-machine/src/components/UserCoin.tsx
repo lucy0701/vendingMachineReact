@@ -9,6 +9,8 @@ interface UserCoinProps {
   handleSaveInsertCoin: (insertCoins: Coin) => void;
   handleSaveTotalAmount: (totalNum: number) => void;
   handleDragInpoMessage: (message: string) => void;
+  isDropField: boolean;
+  setIsDropField: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserCoin: React.FC<UserCoinProps> = ({
@@ -19,6 +21,8 @@ const UserCoin: React.FC<UserCoinProps> = ({
   handleSaveInsertCoin,
   handleSaveTotalAmount,
   handleDragInpoMessage,
+  isDropField,
+  setIsDropField,
 }) => {
   const handleDragStart = () => {
     handleDragInpoMessage('여기에요!');
@@ -28,7 +32,11 @@ const UserCoin: React.FC<UserCoinProps> = ({
     e.preventDefault();
     const target = e.target as HTMLElement;
     const value = Number(target.getAttribute('value'));
-    insertUserCoin(value);
+
+    if (isDropField) {
+      insertUserCoin(value);
+      setIsDropField(false);
+    }
 
     setTimeout(() => {
       handleDragInpoMessage('');
@@ -40,8 +48,8 @@ const UserCoin: React.FC<UserCoinProps> = ({
       const updateTotalNum = totalAmount + Number(userCoin.coin);
       const updateUserCoin = userCoin;
       const updateInsertCoin = insertCoins[value];
-      updateUserCoin.count - 1;
-      updateInsertCoin.count + 1;
+      updateUserCoin.count -= 1;
+      updateInsertCoin.count += 1;
       handleSaveTotalAmount(updateTotalNum);
       handleSaveUserCoin(updateUserCoin);
       handleSaveInsertCoin(updateInsertCoin);

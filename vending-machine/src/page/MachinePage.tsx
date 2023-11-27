@@ -9,25 +9,30 @@ import { formatPrice } from '../utils/number';
 import { useItems } from '../hooks/useItems';
 import { useMachineCoins } from '../hooks/useMachineCoins';
 import { useUserCoins } from '../hooks/useUserCoins';
-import { useTotalAmount } from '../hooks/useTotalAmount';
 import { useInsertCoins } from '../hooks/useInsertCoins';
+import { useTotalAmount } from '../hooks/useTotalAmount';
+import { useMyItems } from '../hooks/useMyItems';
 import { Coin } from '../types/coin';
 import { Item } from '../types/item';
 import { MyItem } from '../types/myItem';
-import { useMyItems } from '../hooks/useMyItems';
+import { useIsPurchased } from '../hooks/useIsPurchased';
+// import { useMultipleCoins } from '../hooks/useMultipleCoins';
 
 export default function MachinePage() {
   const { items, saveItem } = useItems();
-  const { machineCoins } = useMachineCoins();
+  const { machineCoins, saveMachineCoin } = useMachineCoins();
   const { userCoins, saveUserCoin } = useUserCoins();
   const { totalAmount, saveTotalAmount } = useTotalAmount();
   const { insertCoins, saveInsertCoin } = useInsertCoins();
   const { addMyItem } = useMyItems();
+  const { isPurchased, saveIsPurchased } = useIsPurchased();
+  // const { multipleUpdatesCoins } = useMultipleCoins();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isGetItem, setIsGetItem] = useState(false);
   const [dragInpoMessage, setDragInpoMessage] = useState('');
-  const [updateMyItem, setUpdateMyItem] = useState<MyItem>({
+  const [isDropField, setIsDropField] = useState(false);
+  const [createMyItem, setCreateMyItem] = useState<MyItem>({
     id: 0,
     itemName: '',
     url: '',
@@ -36,27 +41,36 @@ export default function MachinePage() {
   const handleSaveTotalAmount = (totalNum: number) => {
     saveTotalAmount(totalNum);
   };
-
   const handleSaveUserCoin = (userCoin: Coin) => {
     saveUserCoin(userCoin);
   };
-  const handleSaveInsertCoin = (insertCoins: Coin) => {
-    saveInsertCoin(insertCoins);
+  const handleSaveInsertCoin = (insertCoin: Coin) => {
+    saveInsertCoin(insertCoin);
+  };
+  const handleSaveMachineCoin = (machineCoin: Coin) => {
+    saveMachineCoin(machineCoin);
   };
   const handleSaveItem = (item: Item) => {
     saveItem(item);
   };
+  const hanaleSaveIsPurchased = (isPurchased: boolean) => {
+    saveIsPurchased(isPurchased);
+  };
 
-  const handleAddMyItem = (myItem:MyItem) => {
+  const handleAddMyItem = (myItem: MyItem) => {
     addMyItem(myItem);
   };
+
   const handleDragInpoMessage = (message: string) => {
     setDragInpoMessage(message);
   };
+  const handleUdateIsPurchased = (isPurchased: boolean) => {
+    hanaleSaveIsPurchased(isPurchased);
+  };
 
-  const handleMyItem = ( name: string, imgUrl: string) => {
-    setUpdateMyItem({ id: 0, itemName: name, url: imgUrl });
-    handleAddMyItem({ id: 0, itemName: name, url: imgUrl })
+  const handleMyItem = (name: string, imgUrl: string) => {
+    setCreateMyItem({ id: 0, itemName: name, url: imgUrl });
+    handleAddMyItem({ id: 0, itemName: name, url: imgUrl });
     setIsGetItem(true);
   };
 
@@ -83,6 +97,7 @@ export default function MachinePage() {
               handleSaveTotalAmount={handleSaveTotalAmount}
               handleSaveItem={handleSaveItem}
               handleMyItem={handleMyItem}
+              handleUdateIsPurchased={handleUdateIsPurchased}
             />
           ))}
         </div>
@@ -107,10 +122,24 @@ export default function MachinePage() {
           dragInpoMessage={dragInpoMessage}
           onClickModal={onClickModal}
           handleDragInpoMessage={handleDragInpoMessage}
+          setIsDropField={setIsDropField}
         />
-        <ReturnCoinButton />
+        <ReturnCoinButton
+          totalAmount={totalAmount}
+          userCoins={userCoins}
+          insertCoins={insertCoins}
+          machineCoins={machineCoins}
+          isPurchased={isPurchased}
+          handleSaveTotalAmount={handleSaveTotalAmount}
+          handleSaveUserCoin={handleSaveUserCoin}
+          handleSaveInsertCoin={handleSaveInsertCoin}
+          handleSaveMachineCoin={handleSaveMachineCoin}
+          handleUdateIsPurchased={handleUdateIsPurchased}
+
+          // multipleUpdatesCoins ={multipleUpdatesCoins}
+        />
         <GetItemBox
-          updateMyItem={updateMyItem}
+          createMyItem={createMyItem}
           isGetItem={isGetItem}
           onClickMyItme={onClickMyItme}
         />
@@ -133,6 +162,8 @@ export default function MachinePage() {
               handleSaveInsertCoin={handleSaveInsertCoin}
               handleSaveTotalAmount={handleSaveTotalAmount}
               handleDragInpoMessage={handleDragInpoMessage}
+              setIsDropField={setIsDropField}
+              isDropField={isDropField}
             />
           );
         })}

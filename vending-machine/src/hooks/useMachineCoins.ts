@@ -37,6 +37,7 @@ export const useMachineCoins = () => {
   }, []);
 
   return {
+    getMachineCoins,
     machineCoins,
     saveMachineCoin,
   };
