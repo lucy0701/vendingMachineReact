@@ -1,13 +1,12 @@
 import React from 'react';
 import { Coin } from '../types/coin';
+import { useUserCoins } from '../hooks/useUserCoins';
+import { useInsertCoins } from '../hooks/useInsertCoins';
+import { useTotalAmount } from '../hooks/useTotalAmount';
+
 
 interface UserCoinProps {
   userCoin: Coin;
-  insertCoins: Coin[];
-  totalAmount: number;
-  handleSaveUserCoin: (userCoin: Coin) => void;
-  handleSaveInsertCoin: (insertCoins: Coin) => void;
-  handleSaveTotalAmount: (totalNum: number) => void;
   handleDragInpoMessage: (message: string) => void;
   isDropField: boolean;
   setIsDropField: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,15 +14,15 @@ interface UserCoinProps {
 
 const UserCoin: React.FC<UserCoinProps> = ({
   userCoin,
-  insertCoins,
-  totalAmount,
-  handleSaveUserCoin,
-  handleSaveInsertCoin,
-  handleSaveTotalAmount,
   handleDragInpoMessage,
   isDropField,
   setIsDropField,
 }) => {
+  const { saveUserCoin } = useUserCoins();
+  const { insertCoins, saveInsertCoin } = useInsertCoins();
+  const { totalAmount, saveTotalAmount } = useTotalAmount();
+
+
   const handleDragStart = () => {
     handleDragInpoMessage('여기에요!');
   };
@@ -46,13 +45,13 @@ const UserCoin: React.FC<UserCoinProps> = ({
   const insertUserCoin = (value: number) => {
     if (userCoin.count > 0) {
       const updateTotalNum = totalAmount + Number(userCoin.coin);
-      const updateUserCoin = userCoin;
-      const updateInsertCoin = insertCoins[value];
+      const updateUserCoin = { ...userCoin };
+      const updateInsertCoin = { ...insertCoins[value] };
       updateUserCoin.count -= 1;
       updateInsertCoin.count += 1;
-      handleSaveTotalAmount(updateTotalNum);
-      handleSaveUserCoin(updateUserCoin);
-      handleSaveInsertCoin(updateInsertCoin);
+      saveTotalAmount(updateTotalNum);
+      saveUserCoin(updateUserCoin);
+      saveInsertCoin(updateInsertCoin);
     }
   };
 

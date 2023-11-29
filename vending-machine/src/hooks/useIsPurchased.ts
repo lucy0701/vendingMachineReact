@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { readIsPurchased, updateIsPurchased } from '../services/isPurchased';
+import { useRecoilState } from 'recoil';
+import { isPurchasedState } from '../recoil/atoms/containerAtoms/isPurchasedState';
 
 export const useIsPurchased = () => {
-  const [isPurchased, setIsPurchased] = useState<boolean>();
+  const [isPurchased, setIsPurchased] =
+    useRecoilState<boolean>(isPurchasedState);
 
   const getIsPurchased = async () => {
     try {

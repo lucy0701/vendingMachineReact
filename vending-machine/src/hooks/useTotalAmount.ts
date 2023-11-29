@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { readTotalAmount, updateTotalAmount } from '../services/totalAmount';
+import { totalAmountState } from '../recoil/atoms/containerAtoms/totalAmountState';
+import { useRecoilState } from 'recoil';
 
 export const useTotalAmount = () => {
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useRecoilState(totalAmountState);
 
   const getTotalAmount = async () => {
     try {

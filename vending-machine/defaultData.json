@@ -6,54 +6,54 @@
     {
       "id": 0,
       "coin": "100",
-      "count": 71
+      "count": 67
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 126
+      "count": 124
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 112
+      "count": 124
     },
     {
       "id": 3,
       "coin": "5",
-      "count": 10
+      "count": 12
     },
     {
       "id": 4,
       "coin": "1",
-      "count": 10
+      "count": 16
     }
   ],
   "machine-coins": [
     {
       "id": 0,
       "coin": "100",
-      "count": 110
+      "count": 106
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 87
+      "count": 86
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 67
+      "count": 55
     },
     {
       "id": 3,
       "coin": "5",
-      "count": 10
+      "count": 8
     },
     {
       "id": 4,
       "coin": "1",
-      "count": 10
+      "count": 4
     }
   ],
   "items": [
@@ -82,7 +82,7 @@
       "id": 3,
       "itemName": "콩",
       "price": 20,
-      "stock": 40,
+      "stock": 31,
       "url": "/src_assets/img17.png"
     },
     {
@@ -96,7 +96,7 @@
       "id": 5,
       "itemName": "번",
       "price": 18,
-      "stock": 10,
+      "stock": 2,
       "url": "/src_assets/img14.png"
     },
     {
@@ -174,7 +174,17 @@
   ],
   "myitems": [
     {
-      "id": 2,
+      "id": 5,
+      "itemName": "번",
+      "url": "/src_assets/img14.png"
+    },
+    {
+      "id": 6,
+      "itemName": "번",
+      "url": "/src_assets/img14.png"
+    },
+    {
+      "id": 7,
       "itemName": "콩",
       "url": "/src_assets/img17.png"
     }

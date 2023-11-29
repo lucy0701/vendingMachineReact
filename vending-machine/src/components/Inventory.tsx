@@ -27,7 +27,7 @@ export default function Inventory() {
     <div className="inventory">
       {myItems.map(myItem => {
         return (
-          <div key={myItem.id} className="myitem-box">
+          <div key={myItem.id} className="myitem-box" >
             <img className="my-item" src={myItem.url} alt={myItem.itemName} />
             <button
               className="myitem-delete-btn"

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   readInsertCoins,
   createInsertCoin,
@@ -6,9 +6,11 @@ import {
   deleteInsertCoin,
 } from '../services/insertCoin';
 import { Coin } from '../types/coin';
+import { useRecoilState } from 'recoil';
+import { insertCoinState } from '../recoil/atoms/containerAtoms/insertCoinState';
 
 export const useInsertCoins = () => {
-  const [insertCoins, setInsertCoins] = useState<Coin[]>([]);
+  const [insertCoins, setInsertCoins] = useRecoilState<Coin[]>(insertCoinState);
 
   const getInsertCoins = async () => {
     try {

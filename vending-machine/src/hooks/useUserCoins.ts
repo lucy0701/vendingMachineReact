@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { readUserCoins, updateUserCoin } from '../services/userCoin';
 import { Coin } from '../types/coin';
+import { useRecoilState } from 'recoil';
+import { userCoinState } from '../recoil/atoms/containerAtoms/userCoinState';
 
 export const useUserCoins = () => {
-  const [userCoins, setUserCoins] = useState<Coin[]>([]);
+  const [userCoins, setUserCoins] = useRecoilState<Coin[]>(userCoinState);
 
   const getUserCoins = async () => {
     try {

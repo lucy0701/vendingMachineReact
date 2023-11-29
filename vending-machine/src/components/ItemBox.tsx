@@ -1,33 +1,34 @@
 import React from 'react';
 import { formatPrice } from '../utils/number';
 import { Item } from '../types/item';
+import { useTotalAmount } from '../hooks/useTotalAmount';
+import { useItems } from '../hooks/useItems';
+import { useIsPurchased } from '../hooks/useIsPurchased';
+
 
 interface ItemBoxProps {
   item: Item;
-  totalAmount: number;
-  handleSaveTotalAmount: (updateTotalNum: number) => void;
-  handleSaveItem: (item: Item) => void;
-  handleMyItem: (name:string,imgUrl:string ) => void;
-  handleUdateIsPurchased: (purchased: boolean) => void;
+  handleMyItem: (name: string, imgUrl: string) => void;
 }
 
 const ItemBox: React.FC<ItemBoxProps> = ({
   item,
-  totalAmount,
-  handleSaveTotalAmount,
-  handleSaveItem,
   handleMyItem,
-  handleUdateIsPurchased,
 }) => {
+  const { totalAmount, saveTotalAmount } = useTotalAmount();
+  const { saveItem } = useItems();
+  const { saveIsPurchased } = useIsPurchased();
+
+
   const onClickBuyBtn = () => {
     if (totalAmount > item.price && item.stock > 0) {
-      const updateTotalNum = totalAmount - Number(item.price) ;
-      const updateItemStock = item;
+      const updateTotalNum = totalAmount - Number(item.price);
+      const updateItemStock = {...item};
       updateItemStock.stock -= 1;
-      handleSaveTotalAmount(updateTotalNum);
-      handleSaveItem(updateItemStock);
-      handleMyItem( item.itemName, item.url);
-      handleUdateIsPurchased(true);
+      saveTotalAmount(updateTotalNum);
+      saveItem(updateItemStock);
+      handleMyItem(item.itemName, item.url);
+      saveIsPurchased(true);
     }
   };
   return (
