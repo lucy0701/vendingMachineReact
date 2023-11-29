@@ -6,17 +6,17 @@
     {
       "id": 0,
       "coin": "100",
-      "count": 72
+      "count": 71
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 125
+      "count": 126
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 109
+      "count": 112
     },
     {
       "id": 3,
@@ -38,12 +38,12 @@
     {
       "id": 1,
       "coin": "50",
-      "count": 88
+      "count": 87
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 70
+      "count": 67
     },
     {
       "id": 3,
@@ -82,7 +82,7 @@
       "id": 3,
       "itemName": "콩",
       "price": 20,
-      "stock": 42,
+      "stock": 40,
       "url": "/src_assets/img17.png"
     },
     {
@@ -172,7 +172,13 @@
       "url": "/src_assets/img16.png"
     }
   ],
-  "myitems": [],
+  "myitems": [
+    {
+      "id": 2,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
+    }
+  ],
   "insert-coins": [
     {
       "id": 0,
