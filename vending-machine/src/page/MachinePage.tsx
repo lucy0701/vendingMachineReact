@@ -23,17 +23,11 @@ export default function MachinePage() {
   const [isOpen, setIsOpen] = useState(false);
   const [isGetItem, setIsGetItem] = useState(false);
 
-  const [dragInpoMessage, setDragInpoMessage] = useState('');
-  const [isDropField, setIsDropField] = useState(false);
   const [createMyItem, setCreateMyItem] = useState<MyItem>({
     id: 0,
     itemName: '',
     url: '',
   });
-
-  const handleDragInpoMessage = (message: string) => {
-    setDragInpoMessage(message);
-  };
 
   const handleMyItem = (name: string, imgUrl: string) => {
     setCreateMyItem({ id: 0, itemName: name, url: imgUrl });
@@ -42,9 +36,9 @@ export default function MachinePage() {
   };
 
   const onClickModal = () => (isOpen ? setIsOpen(false) : setIsOpen(true));
-  
+
   const onClickMyItem = () => {
-    isGetItem ? setIsGetItem(false) : setIsGetItem(true);
+    if (isGetItem) setIsGetItem(false);
   };
 
   return (
@@ -72,12 +66,7 @@ export default function MachinePage() {
         <div className="total-screen">
           <span className="total-num">{formatPrice(totalAmount)}</span>
         </div>
-        <EntCoinBox
-          dragInpoMessage={dragInpoMessage}
-          onClickModal={onClickModal}
-          handleDragInpoMessage={handleDragInpoMessage}
-          setIsDropField={setIsDropField}
-        />
+        <EntCoinBox onClickModal={onClickModal} />
         <ReturnCoinButton />
         <GetItemBox
           createMyItem={createMyItem}
@@ -93,15 +82,7 @@ export default function MachinePage() {
         btnName="CLOSE"
       >
         {userCoins.map(userCoin => {
-          return (
-            <UserCoin
-              key={userCoin.coin}
-              userCoin={userCoin}
-              handleDragInpoMessage={handleDragInpoMessage}
-              setIsDropField={setIsDropField}
-              isDropField={isDropField}
-            />
-          );
+          return <UserCoin key={userCoin.coin} userCoin={userCoin} />;
         })}
       </Modal>
     </div>

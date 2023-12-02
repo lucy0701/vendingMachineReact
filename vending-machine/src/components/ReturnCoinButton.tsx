@@ -13,19 +13,20 @@ const ReturnCoinButton = () => {
   const { isPurchased, saveIsPurchased } = useIsPurchased();
 
   const handleReturnBtn = () => {
-    let minusTotal = totalAmount;
+    let total = totalAmount;
     const updateUserCoins: Coin[] = JSON.parse(JSON.stringify(userCoins));
+    
     if (!isPurchased) {
       updateUserCoins.forEach((userCoin, index) => {
         const insertCoin = { ...insertCoins[index] };
 
         if (insertCoin.count !== 0) {
-          minusTotal -= Number(insertCoin.coin) * insertCoin.count;
+          total -= Number(insertCoin.coin) * insertCoin.count;
           userCoin.count += insertCoin.count;
           insertCoin.count = 0;
           saveUserCoin(userCoin);
           saveInsertCoin(insertCoin);
-        } else if (minusTotal <= 0) {
+        } else if (total <= 0) {
           return;
         }
       });
@@ -36,7 +37,7 @@ const ReturnCoinButton = () => {
         const machineCoin = { ...machineCoins[index] };
         const insertCoin = { ...insertCoins[index] };
 
-        count = Math.floor(minusTotal / Number(machineCoin.coin));
+        count = Math.floor(total / Number(machineCoin.coin));
 
         if (insertCoin.count > 0) {
           machineCoin.count += insertCoin.count;
@@ -44,24 +45,24 @@ const ReturnCoinButton = () => {
           saveInsertCoin(insertCoin);
         }
         if (
-          minusTotal > 0 &&
+          total > 0 &&
           machineCoin.count > 0 &&
           machineCoin.count >= count &&
           count > 0
         ) {
-          minusTotal -= count * Number(machineCoin.coin);
+          total -= count * Number(machineCoin.coin);
           machineCoin.count -= count;
           userCoin.count += count;
 
           saveUserCoin(userCoin);
           saveMachineCoin(machineCoin);
-        } else if (minusTotal <= 0) {
+        } else if (total <= 0) {
           return;
         }
       });
       saveIsPurchased(false);
     }
-    saveTotalAmount(minusTotal);
+    saveTotalAmount(total);
   };
 
   return (

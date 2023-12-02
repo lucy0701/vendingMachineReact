@@ -1,5 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import Inventory from '../components/Inventory';
+import CheckModal from '../components/CheckModal';
+
 
 export default function Template() {
   return (
@@ -11,6 +13,7 @@ export default function Template() {
         <div className="App-page">
           <Outlet />
         </div>
+      <CheckModal />
       </div>
       <footer className="App-footer">
         <div className="footer-box">

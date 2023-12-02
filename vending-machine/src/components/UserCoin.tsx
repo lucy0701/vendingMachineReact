@@ -3,42 +3,39 @@ import { Coin } from '../types/coin';
 import { useUserCoins } from '../hooks/useUserCoins';
 import { useInsertCoins } from '../hooks/useInsertCoins';
 import { useTotalAmount } from '../hooks/useTotalAmount';
-
+import {
+  dragInpoMessageState,
+  isDropFieldState,
+} from '../recoil/atoms/presentationAtoms/dragAndDropSate';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 interface UserCoinProps {
   userCoin: Coin;
-  handleDragInpoMessage: (message: string) => void;
-  isDropField: boolean;
-  setIsDropField: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UserCoin: React.FC<UserCoinProps> = ({
-  userCoin,
-  handleDragInpoMessage,
-  isDropField,
-  setIsDropField,
-}) => {
+const UserCoin: React.FC<UserCoinProps> = ({ userCoin }) => {
   const { saveUserCoin } = useUserCoins();
   const { insertCoins, saveInsertCoin } = useInsertCoins();
   const { totalAmount, saveTotalAmount } = useTotalAmount();
 
+  const setDragInpoMessage = useSetRecoilState(dragInpoMessageState);
+  const [isDropField, setIsDropField] =
+    useRecoilState<boolean>(isDropFieldState);
 
   const handleDragStart = () => {
-    handleDragInpoMessage('여기에요!');
+    setDragInpoMessage('여기에요!');
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
     const value = Number(target.getAttribute('value'));
-
     if (isDropField) {
       insertUserCoin(value);
       setIsDropField(false);
     }
-
     setTimeout(() => {
-      handleDragInpoMessage('');
+      setDragInpoMessage('');
     }, 1000);
   };
 

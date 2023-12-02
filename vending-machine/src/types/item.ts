@@ -4,4 +4,5 @@ export interface Item {
   price: number;
   stock: number;
   url: string;
+  isModified: boolean;
 }

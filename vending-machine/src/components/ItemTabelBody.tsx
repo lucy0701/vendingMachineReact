@@ -2,6 +2,7 @@ import React from 'react';
 import { formatPrice } from '../utils/number';
 import { Item } from '../types/item';
 
+
 interface ItemTabelBodyPorps {
   item: Item;
   buttonName: string;
@@ -18,10 +19,9 @@ const ItemTabelBody = ({
   onChangePrice,
   onChangeStock,
   onClickButton,
-  onClickTabelTr
+  onClickTabelTr,
 }: ItemTabelBodyPorps) => {
-
-
+  
   return (
     <tr
       className="item-list"
@@ -33,7 +33,7 @@ const ItemTabelBody = ({
         <input
           type="text"
           className="manager-input"
-          name='manager-input'
+          name="manager-input"
           value={item.itemName}
           placeholder={item.itemName}
           onChange={onChangeName}
@@ -43,7 +43,7 @@ const ItemTabelBody = ({
         <input
           type="text"
           className="manager-input"
-          name='manager-input'
+          name="manager-input"
           value={formatPrice(item.price)}
           placeholder={formatPrice(item.price)}
           onChange={onChangePrice}
@@ -53,17 +53,14 @@ const ItemTabelBody = ({
         <input
           type="text"
           className="manager-input"
-          name='manager-input'
+          name="manager-input"
           value={formatPrice(item.stock)}
           placeholder={formatPrice(item.stock)}
           onChange={onChangeStock}
         />
       </td>
       <td>
-        <button
-          type="button"
-          onClick={onClickButton}
-        >
+        <button type="button" onClick={onClickButton}>
           {buttonName}
         </button>
       </td>

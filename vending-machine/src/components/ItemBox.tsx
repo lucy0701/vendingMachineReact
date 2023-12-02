@@ -5,7 +5,6 @@ import { useTotalAmount } from '../hooks/useTotalAmount';
 import { useItems } from '../hooks/useItems';
 import { useIsPurchased } from '../hooks/useIsPurchased';
 
-
 interface ItemBoxProps {
   item: Item;
   handleMyItem: (name: string, imgUrl: string) => void;
@@ -19,7 +18,6 @@ const ItemBox: React.FC<ItemBoxProps> = ({
   const { saveItem } = useItems();
   const { saveIsPurchased } = useIsPurchased();
 
-
   const onClickBuyBtn = () => {
     if (totalAmount > item.price && item.stock > 0) {
       const updateTotalNum = totalAmount - Number(item.price);
@@ -31,6 +29,7 @@ const ItemBox: React.FC<ItemBoxProps> = ({
       saveIsPurchased(true);
     }
   };
+
   return (
     <div className="item-box">
       <div className="item-image">
@@ -39,7 +38,7 @@ const ItemBox: React.FC<ItemBoxProps> = ({
         <div className="item-stock">{item.stock}</div>
         <img className="item-img-print" src={item.url} alt={item.itemName} />
       </div>
-      <button className="buy-btn" onClick={onClickBuyBtn}>
+      <button className="buy-btn" onClick={onClickBuyBtn} >
         구매
       </button>
     </div>
