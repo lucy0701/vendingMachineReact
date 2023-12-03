@@ -9,7 +9,6 @@ import { itemState } from '../recoil/atoms/containerAtoms/itemState';
 const ItemTable = () => {
   const { handleModal } = useModal();
   const { refreshItems, saveItem, addItem, removeItem } = useItems();
-
   const [items, setItems] = useRecoilState<Item[]>(itemState);
 
   const [inpoMessage, setInpoMessage] = useState('');
@@ -55,7 +54,7 @@ const ItemTable = () => {
     });
   };
 
-  const handleUpdateItems = (
+  const handleUpdateItem = (
     item: Item,
     key: string,
     value: string | number,
@@ -99,7 +98,7 @@ const ItemTable = () => {
       setErrorMessage('');
       return;
     }
-    handleUpdateItems(item, key, num);
+    handleUpdateItem(item, key, num);
   };
 
   const onChangeTextInput = (
@@ -118,7 +117,7 @@ const ItemTable = () => {
     }
 
     setErrorMessage('');
-    handleUpdateItems(item, key, name);
+    handleUpdateItem(item, key, name);
   };
 
   const onChangeAddItemNumberInput = (
@@ -196,7 +195,7 @@ const ItemTable = () => {
 
   const onClickItemInit = () => {
     handleModal('취소 하시겠습니까? \n 작성한 목록 초기화 됨', () =>
-      handleRefreshItem(),
+      refreshItems(),
     );
   };
 
@@ -208,10 +207,6 @@ const ItemTable = () => {
     }
     target.style.background = '#c3e9bf';
     setSelectedTarget(target);
-  };
-  
-  const handleRefreshItem = () => {
-    return refreshItems();
   };
 
   return (
@@ -246,12 +241,8 @@ const ItemTable = () => {
               item={selectItem}
               buttonName="추가"
               onChangeName={e => onChangeAddItemTextInput(e, 'itemName')}
-              onChangePrice={e => {
-                onChangeAddItemNumberInput(e, 'price');
-              }}
-              onChangeStock={e => {
-                onChangeAddItemNumberInput(e, 'stock');
-              }}
+              onChangePrice={e => onChangeAddItemNumberInput(e, 'price')}
+              onChangeStock={e => onChangeAddItemNumberInput(e, 'stock')}
               onClickButton={onClickAddItem}
               onClickTabelTr={onClickTabelTr}
             />

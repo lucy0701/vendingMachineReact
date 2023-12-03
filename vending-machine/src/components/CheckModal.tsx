@@ -4,6 +4,7 @@ import { useModal } from '../hooks/useModal';
 const CheckModal: React.FC = () => {
   const { isModalPop, modalMessage, onClickModalBtn, onClickModalCheckBtn } = useModal();
 
+  console.log('PSJ: isModalPop', isModalPop)
   return (
     <div
       className="modal-box"

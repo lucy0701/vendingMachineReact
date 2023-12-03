@@ -22,7 +22,6 @@ export default function MachinePage() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isGetItem, setIsGetItem] = useState(false);
-
   const [createMyItem, setCreateMyItem] = useState<MyItem>({
     id: 0,
     itemName: '',
@@ -74,13 +73,7 @@ export default function MachinePage() {
           onClickMyItem={onClickMyItem}
         />
       </div>
-      <Modal
-        name="coin-modal"
-        isOpen={isOpen}
-        onClickModal={onClickModal}
-        btnClassName="coin-modal-close-btn"
-        btnName="CLOSE"
-      >
+      <Modal isOpen={isOpen} onClickModal={onClickModal}>
         {userCoins.map(userCoin => {
           return <UserCoin key={userCoin.coin} userCoin={userCoin} />;
         })}
