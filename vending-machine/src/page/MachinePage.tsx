@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ItemBox from '../components/ItemBox';
 import Modal from '../components/Modal';
 import UserCoin from '../components/UserCoin';
@@ -39,6 +39,19 @@ export default function MachinePage() {
   const onClickMyItem = () => {
     if (isGetItem) setIsGetItem(false);
   };
+
+  useEffect(()=> {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        onClickModal();
+      }
+    }
+    document.addEventListener('keydown',  handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    }
+  }, [isOpen])
 
   return (
     <div className="machine-body">

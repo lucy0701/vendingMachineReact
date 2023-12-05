@@ -15,24 +15,18 @@ export const useModal = () => {
 
   const onClickModalBtn = () => {
     setIsModalPop(!isModalPop);
-
-    console.log('PSJ: onClickModalBtn')
   };
 
   const handleModal = (message: string, onClickEvent: () => void) => {
     setModalMessage(message);
     setModalEvent(() => onClickEvent);
     onClickModalBtn();
-
-    console.log('PSJ: handleModal')
   };
 
   const onClickModalCheckBtn = () => {
     if (modalEvent !== undefined && modalEvent !== null) {
       modalEvent();
       onClickModalBtn();
-
-      console.log('PSJ: onClickModalCheckBtn')
     }
   };
 
@@ -42,12 +36,16 @@ export const useModal = () => {
         e.preventDefault();
         onClickModalCheckBtn();
       }
+      if (e.key === 'Escape' && isModalPop) {
+        e.preventDefault();
+        onClickModalBtn();
+      }
     };
-    document.addEventListener('keypress', handleKeyPress);
+    document.addEventListener('keydown', handleKeyPress);
     return () => {
-      document.removeEventListener('keypress', handleKeyPress);
+      document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [isModalPop,onClickModalCheckBtn]);
+  }, [isModalPop]);
 
   return {
     isModalPop,

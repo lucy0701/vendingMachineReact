@@ -15,7 +15,6 @@ export const useMyItems = () => {
   const getMyItems = async () => {
     try {
       const response = await readMyItems();
-
       if (response) {
         setMyItems(response.data);
       }

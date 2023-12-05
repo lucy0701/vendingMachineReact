@@ -28,7 +28,6 @@ const ItemTable = () => {
     price: 10000,
     stock: 200,
   };
-
   const [selectedTarget, setSelectedTarget] = useState<HTMLElement | null>(
     null,
   );

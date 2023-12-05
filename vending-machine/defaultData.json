@@ -1,12 +1,12 @@
 {
   "total-amount": {
-    "total": 0
+    "total": 5
   },
   "user-coins": [
     {
       "id": 0,
       "coin": "100",
-      "count": 65
+      "count": 63
     },
     {
       "id": 1,
@@ -21,7 +21,7 @@
     {
       "id": 3,
       "coin": "5",
-      "count": 12
+      "count": 13
     },
     {
       "id": 4,
@@ -48,7 +48,7 @@
     {
       "id": 3,
       "coin": "5",
-      "count": 100
+      "count": 99
     },
     {
       "id": 4,
@@ -85,7 +85,7 @@
       "id": 4,
       "itemName": "재희",
       "price": 95,
-      "stock": 100,
+      "stock": 98,
       "url": "/src_assets/img10.png",
       "isModified": false
     },
@@ -177,7 +177,7 @@
     {
       "id": 0,
       "coin": "100",
-      "count": 0
+      "count": 1
     },
     {
       "id": 1,
@@ -201,6 +201,6 @@
     }
   ],
   "is-purchased": {
-    "purchased": false
+    "purchased": true
   }
 }
