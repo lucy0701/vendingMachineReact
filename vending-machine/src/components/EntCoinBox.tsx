@@ -2,8 +2,9 @@ import React from 'react';
 import {
   dragInpoMessageState,
   isDropFieldState,
-} from '../recoil/atoms/presentationAtoms/dragAndDropSate';
+} from '../recoil/atoms/presentationAtoms/dragAndDropState';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+
 
 interface EntCoinBoxPorps {
   onClickModal: () => void;

@@ -12,6 +12,8 @@ import { useUserCoins } from '../hooks/useUserCoins';
 import { useTotalAmount } from '../hooks/useTotalAmount';
 import { useMyItems } from '../hooks/useMyItems';
 import { MyItem } from '../types/myItem';
+import { infoMessageState } from '../recoil/atoms/presentationAtoms/infoMessageState';
+import { useRecoilValue } from 'recoil';
 
 export default function MachinePage() {
   const { items } = useItems();
@@ -19,6 +21,8 @@ export default function MachinePage() {
   const { userCoins } = useUserCoins();
   const { totalAmount } = useTotalAmount();
   const { addMyItem } = useMyItems();
+
+  const infoMessage = useRecoilValue(infoMessageState);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isGetItem, setIsGetItem] = useState(false);
@@ -40,18 +44,18 @@ export default function MachinePage() {
     if (isGetItem) setIsGetItem(false);
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
         e.preventDefault();
         onClickModal();
       }
-    }
-    document.addEventListener('keydown',  handleKeyPress);
+    };
+    document.addEventListener('keydown', handleKeyPress);
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
-    }
-  }, [isOpen])
+    };
+  }, [isOpen]);
 
   return (
     <div className="machine-body">
@@ -74,9 +78,14 @@ export default function MachinePage() {
       </div>
 
       <div className="body-rigth">
-        <h2>CRYSTAL</h2>
-        <div className="total-screen">
-          <span className="total-num">{formatPrice(totalAmount)}</span>
+        <div className="screen">
+          <h2>CRYSTAL</h2>
+          <div className="info-screen">
+            <span className="info-message">{ infoMessage }</span>
+          </div>
+          <div className="total-screen">
+            <span className="total-num">{formatPrice(totalAmount)}</span>
+          </div>
         </div>
         <EntCoinBox onClickModal={onClickModal} />
         <ReturnCoinButton />

@@ -6,7 +6,7 @@ import { useTotalAmount } from '../hooks/useTotalAmount';
 import {
   dragInpoMessageState,
   isDropFieldState,
-} from '../recoil/atoms/presentationAtoms/dragAndDropSate';
+} from '../recoil/atoms/presentationAtoms/dragAndDropState';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 interface UserCoinProps {
