@@ -1,24 +1,27 @@
 import React from 'react';
 import { formatPrice } from '../utils/number';
 import { Item } from '../types/item';
-import { useTotalAmount } from '../hooks/useTotalAmount';
-import { useItems } from '../hooks/useItems';
-import { useIsPurchased } from '../hooks/useIsPurchased';
 import { infoMessageState } from '../recoil/atoms/presentationAtoms/infoMessageState';
 import { useSetRecoilState } from 'recoil';
 
 interface ItemBoxProps {
   item: Item;
   handleMyItem: (name: string, imgUrl: string) => void;
+  totalAmount: number;
+  saveTotalAmount: (saveTotalAmount: number) => Promise<void>;
+  saveItem: (saveItem: Item) => Promise<void>;
+  saveIsPurchased: (saveIsPurchased: boolean) => Promise<void>;
 }
 
-const ItemBox: React.FC<ItemBoxProps> = ({ item, handleMyItem }) => {
-  const { totalAmount, saveTotalAmount } = useTotalAmount();
-  const { saveItem } = useItems();
-  const { saveIsPurchased } = useIsPurchased();
-
+const ItemBox: React.FC<ItemBoxProps> = ({
+  item,
+  handleMyItem,
+  totalAmount,
+  saveTotalAmount,
+  saveItem,
+  saveIsPurchased
+}) => {
   const setInfoMessage = useSetRecoilState(infoMessageState);
-
   const buttonStyle = {
     backgroundColor: totalAmount >= item.price && 0 < item.stock ? 'red' : '',
   };
@@ -32,9 +35,9 @@ const ItemBox: React.FC<ItemBoxProps> = ({ item, handleMyItem }) => {
     } else if (totalAmount < item.price) {
       setInfoMessage(`${item.price - totalAmount} 코인이 부족합니다`);
     }
-    setTimeout (()=> {
+    setTimeout(() => {
       setInfoMessage('어서오세요');
-    },1500)
+    }, 1500);
   };
 
   const onClickBuyBtn = () => {
@@ -47,9 +50,9 @@ const ItemBox: React.FC<ItemBoxProps> = ({ item, handleMyItem }) => {
       handleMyItem(item.itemName, item.url);
       saveIsPurchased(true);
       setInfoMessage('감사합니다');
-      setTimeout (()=> {
+      setTimeout(() => {
         setInfoMessage('어서오세요');
-      },1500)
+      }, 1500);
     } else {
       displayInfoMessage();
     }

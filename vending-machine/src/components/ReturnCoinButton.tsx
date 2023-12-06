@@ -1,21 +1,33 @@
-import { useUserCoins } from '../hooks/useUserCoins';
-import { useInsertCoins } from '../hooks/useInsertCoins';
-import { useTotalAmount } from '../hooks/useTotalAmount';
-import { useMachineCoins } from '../hooks/useMachineCoins';
 import { Coin } from '../types/coin';
-import { useIsPurchased } from '../hooks/useIsPurchased';
 
-const ReturnCoinButton = () => {
-  const { userCoins, saveUserCoin } = useUserCoins();
-  const { insertCoins, saveInsertCoin } = useInsertCoins();
-  const { totalAmount, saveTotalAmount } = useTotalAmount();
-  const { machineCoins, saveMachineCoin } = useMachineCoins();
-  const { isPurchased, saveIsPurchased } = useIsPurchased();
-
+interface ReturnCoinButtonProps {
+  totalAmount: number;
+  saveTotalAmount: (saveTotalAmount: number) => Promise<void>;
+  userCoins: Coin[];
+  saveUserCoin: (saveUserCoin: Coin) => Promise<void>;
+  machineCoins: Coin[];
+  saveMachineCoin: (saveMachineCoin: Coin) => Promise<void>;
+  insertCoins: Coin[];
+  saveInsertCoin: (saveInsertCoin: Coin) => Promise<void>;
+  isPurchased: boolean;
+  saveIsPurchased: (saveIsPurchased: boolean) => Promise<void>;
+}
+const ReturnCoinButton = ({
+  totalAmount,
+  saveTotalAmount,
+  userCoins,
+  saveUserCoin,
+  machineCoins,
+  saveMachineCoin,
+  insertCoins,
+  saveInsertCoin,
+  isPurchased,
+  saveIsPurchased,
+}: ReturnCoinButtonProps) => {
   const handleReturnBtn = () => {
     let total = totalAmount;
     const updateUserCoins: Coin[] = JSON.parse(JSON.stringify(userCoins));
-    
+
     if (!isPurchased) {
       updateUserCoins.forEach((userCoin, index) => {
         const insertCoin = { ...insertCoins[index] };

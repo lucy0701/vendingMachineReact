@@ -27,6 +27,7 @@ export const useTotalAmount = () => {
       console.log(error);
     }
   };
+  
   useEffect(() => {
     getTotalAmount();
   }, []);

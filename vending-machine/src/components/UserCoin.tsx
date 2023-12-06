@@ -1,8 +1,5 @@
 import React from 'react';
 import { Coin } from '../types/coin';
-import { useUserCoins } from '../hooks/useUserCoins';
-import { useInsertCoins } from '../hooks/useInsertCoins';
-import { useTotalAmount } from '../hooks/useTotalAmount';
 import {
   dragInpoMessageState,
   isDropFieldState,
@@ -11,13 +8,21 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 interface UserCoinProps {
   userCoin: Coin;
+  totalAmount: number;
+  saveTotalAmount: (saveTotalAmount: number) => Promise<void>;
+  saveUserCoin: (saveUserCoin: Coin) => Promise<void>;
+  insertCoins: Coin[];
+  saveInsertCoin: (saveInsertCoin: Coin) => Promise<void>;
 }
 
-const UserCoin: React.FC<UserCoinProps> = ({ userCoin }) => {
-  const { saveUserCoin } = useUserCoins();
-  const { insertCoins, saveInsertCoin } = useInsertCoins();
-  const { totalAmount, saveTotalAmount } = useTotalAmount();
-
+const UserCoin: React.FC<UserCoinProps> = ({
+  userCoin,
+  totalAmount,
+  saveTotalAmount,
+  saveUserCoin,
+  insertCoins,
+  saveInsertCoin
+}) => {
   const setDragInpoMessage = useSetRecoilState(dragInpoMessageState);
   const [isDropField, setIsDropField] =
     useRecoilState<boolean>(isDropFieldState);
