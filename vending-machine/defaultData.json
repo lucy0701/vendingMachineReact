@@ -1,59 +1,59 @@
 {
   "total-amount": {
-    "total": 137
+    "total": 0
   },
   "user-coins": [
     {
       "id": 0,
       "coin": "100",
-      "count": 48
+      "count": 46
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 117
+      "count": 115
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 146
+      "count": 171
     },
     {
       "id": 3,
       "coin": "5",
-      "count": 14
+      "count": 15
     },
     {
       "id": 4,
       "coin": "1",
-      "count": 32
+      "count": 42
     }
   ],
   "machine-coins": [
     {
       "id": 0,
       "coin": "100",
-      "count": 108
+      "count": 110
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 88
+      "count": 84
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 33
+      "count": 5
     },
     {
       "id": 3,
       "coin": "5",
-      "count": 98
+      "count": 97
     },
     {
       "id": 4,
       "coin": "1",
-      "count": 90
+      "count": 80
     }
   ],
   "items": [
@@ -85,7 +85,7 @@
       "id": 3,
       "itemName": "콩",
       "price": 20,
-      "stock": 0,
+      "stock": 4,
       "url": "/src_assets/img17.png",
       "isModified": false
     },
@@ -101,7 +101,7 @@
       "id": 5,
       "itemName": "번",
       "price": 18,
-      "stock": 5,
+      "stock": 1,
       "url": "/src_assets/img14.png",
       "isModified": false
     },
@@ -190,11 +190,6 @@
   ],
   "myitems": [
     {
-      "id": 1,
-      "itemName": "재희",
-      "url": "/src_assets/img10.png"
-    },
-    {
       "id": 32,
       "itemName": "콩",
       "url": "/src_assets/img17.png"
@@ -206,30 +201,60 @@
     },
     {
       "id": 34,
-      "itemName": "번",
-      "url": "/src_assets/img14.png"
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
     },
     {
       "id": 35,
-      "itemName": "재희",
-      "url": "/src_assets/img10.png"
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
     },
     {
       "id": 36,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
+    },
+    {
+      "id": 37,
       "itemName": "번",
       "url": "/src_assets/img14.png"
+    },
+    {
+      "id": 38,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
+    },
+    {
+      "id": 39,
+      "itemName": "번",
+      "url": "/src_assets/img14.png"
+    },
+    {
+      "id": 40,
+      "itemName": "번",
+      "url": "/src_assets/img14.png"
+    },
+    {
+      "id": 41,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
+    },
+    {
+      "id": 42,
+      "itemName": "콩",
+      "url": "/src_assets/img17.png"
     }
   ],
   "insert-coins": [
     {
       "id": 0,
       "coin": "100",
-      "count": 2
+      "count": 0
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 1
+      "count": 0
     },
     {
       "id": 2,
@@ -248,6 +273,6 @@
     }
   ],
   "is-purchased": {
-    "purchased": true
+    "purchased": false
   }
 }

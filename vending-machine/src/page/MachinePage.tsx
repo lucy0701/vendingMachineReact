@@ -19,11 +19,11 @@ import { useRecoilValue } from 'recoil';
 
 export default function MachinePage() {
   const { items, saveItem } = useItems();
-  const { machineCoins, saveMachineCoin } = useMachineCoins();
-  const { userCoins, saveUserCoin } = useUserCoins();
+  const { machineCoins, saveMachineCoins } = useMachineCoins();
+  const { userCoins, saveUserCoin, saveUserCoins } = useUserCoins();
   const { totalAmount, saveTotalAmount } = useTotalAmount();
   const { addMyItem } = useMyItems();
-  const { insertCoins, saveInsertCoin } = useInsertCoins();
+  const { insertCoins, saveInsertCoin, saveInsertCoins } = useInsertCoins();
   const { isPurchased, saveIsPurchased } = useIsPurchased();
 
   const infoMessage = useRecoilValue(infoMessageState);
@@ -103,11 +103,11 @@ export default function MachinePage() {
           totalAmount={totalAmount}
           saveTotalAmount={saveTotalAmount}
           userCoins={userCoins}
-          saveUserCoin={saveUserCoin}
+          saveUserCoins={saveUserCoins}
           machineCoins={machineCoins}
-          saveMachineCoin={saveMachineCoin}
+          saveMachineCoins={saveMachineCoins}
           insertCoins={insertCoins}
-          saveInsertCoin={saveInsertCoin}
+          saveInsertCoins={saveInsertCoins}
           isPurchased={isPurchased}
           saveIsPurchased={saveIsPurchased}
         />

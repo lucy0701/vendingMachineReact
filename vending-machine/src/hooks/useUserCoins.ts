@@ -10,7 +10,6 @@ export const useUserCoins = () => {
   const getUserCoins = async () => {
     try {
       const response = await readUserCoins();
-
       if (response) {
         setUserCoins(response.data);
       }
@@ -19,12 +18,25 @@ export const useUserCoins = () => {
     }
   };
   const saveUserCoin = async (saveUserCoin: Coin) => {
-    const { id } = saveUserCoin;
+    const { id, count } = saveUserCoin;
     try {
-      const response = await updateUserCoin(id, saveUserCoin);
+      const response = await updateUserCoin(id, count);
       if (response) {
         return getUserCoins();
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const saveUserCoins = async (saveUserCoins: Coin[]) => {
+    try {
+      const promises = saveUserCoins.map(async (updateCoin) => {
+        const { id, count } = updateCoin;
+        await updateUserCoin(id, count);
+      })
+      await Promise.all(promises);
+      await getUserCoins();
     } catch (error) {
       console.log(error);
     }
@@ -34,5 +46,5 @@ export const useUserCoins = () => {
     getUserCoins();
   }, []);
 
-  return { getUserCoins, userCoins, saveUserCoin };
+  return { getUserCoins, userCoins, saveUserCoin, saveUserCoins };
 };

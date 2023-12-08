@@ -14,9 +14,9 @@ export default function ManagerPage() {
   // onError,
 
   return (
-    <form name="manage-page" id="manager-page" method="POST">
+    <div id="manager-page">
       <h2 className="manager-page-title">관리자 페이지</h2>
       <ItemTable/>
-    </form>
+    </div>
   );
 }

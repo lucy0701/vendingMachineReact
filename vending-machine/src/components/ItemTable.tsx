@@ -110,7 +110,6 @@ const ItemTable = () => {
     if (name.length > maxiMum[key]) {
       e.preventDefault();
       setInpoMessage(`이름은 ${maxiMum[key]}자 이하로 입력해 주세요`);
-
       setErrorMessage('');
       return;
     }

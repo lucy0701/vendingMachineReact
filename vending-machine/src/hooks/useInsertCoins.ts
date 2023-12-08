@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import {
   readInsertCoins,
-  createInsertCoin,
   updateInsertCoin,
-  deleteInsertCoin,
 } from '../services/insertCoin';
 import { Coin } from '../types/coin';
 import { useRecoilState } from 'recoil';
@@ -24,21 +22,10 @@ export const useInsertCoins = () => {
     }
   };
 
-  const addInsertCoin = async (addInsertCoin: Coin) => {
-    try {
-      const response = await createInsertCoin(addInsertCoin);
-      if (response) {
-        return getInsertCoins();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const saveInsertCoin = async (saveInsertCoin: Coin) => {
-    const { id } = saveInsertCoin;
+    const { id, count } = saveInsertCoin;
     try {
-      const response = await updateInsertCoin(id, saveInsertCoin);
+      const response = await updateInsertCoin(id, count);
       if (response) {
         return getInsertCoins();
       }
@@ -47,13 +34,15 @@ export const useInsertCoins = () => {
     }
   };
 
-  const removeInsertCoin = async (removeInsertCoin: Coin) => {
-    const { id } = removeInsertCoin;
+  const saveInsertCoins = async (saveInsertCoins: Coin[]) => {
     try {
-      const response = await deleteInsertCoin(id, removeInsertCoin);
-      if (response) {
-        return getInsertCoins();
-      }
+      const promises = saveInsertCoins.map(async (updateCoin) => {
+        const { id, count } = updateCoin;
+        await updateInsertCoin(id, count);
+      })
+      await Promise.all(promises);
+      await getInsertCoins();
+
     } catch (error) {
       console.log(error);
     }
@@ -66,8 +55,7 @@ export const useInsertCoins = () => {
   return {
     getInsertCoins,
     insertCoins,
-    addInsertCoin,
     saveInsertCoin,
-    removeInsertCoin,
+    saveInsertCoins
   };
 };
