@@ -28,6 +28,7 @@ export const useIsPurchased = () => {
       console.log(error);
     }
   };
+  
   useEffect(() => {
     getIsPurchased();
   }, []);

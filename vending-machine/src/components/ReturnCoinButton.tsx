@@ -4,43 +4,41 @@ interface ReturnCoinButtonProps {
   totalAmount: number;
   saveTotalAmount: (saveTotalAmount: number) => Promise<void>;
   userCoins: Coin[];
-  saveUserCoins: (saveUserCoin: Coin[]) => Promise<void>;
+  saveOnlyUserCoin: (saveUserCoin: Coin) => Promise<void>;
   machineCoins: Coin[];
-  saveMachineCoins: (saveMachineCoin: Coin[]) => Promise<void>;
+  saveOnlyMachineCoin: (saveMachineCoin: Coin) => Promise<void>;
   insertCoins: Coin[];
-  saveInsertCoins: (saveInsertCoin: Coin[]) => Promise<void>;
+  saveOnlyInsertCoin: (saveInsertCoin: Coin) => Promise<void>;
   isPurchased: boolean;
   saveIsPurchased: (saveIsPurchased: boolean) => Promise<void>;
+  getUserCoins: () => Promise<void>;
 }
 const ReturnCoinButton = ({
   totalAmount,
   saveTotalAmount,
   userCoins,
-  saveUserCoins,
+  saveOnlyUserCoin,
   machineCoins,
-  saveMachineCoins,
+  saveOnlyMachineCoin,
   insertCoins,
-  saveInsertCoins,
+  saveOnlyInsertCoin,
   isPurchased,
   saveIsPurchased,
+  getUserCoins,
 }: ReturnCoinButtonProps) => {
   const handleReturnBtn = () => {
     let total = totalAmount;
-    const updateUserCoins: Coin[] = [];
-    const updateInsertCoins: Coin[] = [];
-    const updateMachineCoins: Coin[] = [];
 
     if (!isPurchased) {
       userCoins.forEach((coin, index) => {
         const userCoin = { ...coin };
         const insertCoin = { ...insertCoins[index] };
-
         if (insertCoin.count !== 0) {
           total -= Number(insertCoin.coin) * insertCoin.count;
           userCoin.count += insertCoin.count;
           insertCoin.count = 0;
-          updateUserCoins.push(userCoin);
-          updateInsertCoins.push(insertCoin);
+          saveOnlyUserCoin(userCoin);
+          saveOnlyInsertCoin(insertCoin);
         } else if (total <= 0) {
           return;
         }
@@ -57,7 +55,7 @@ const ReturnCoinButton = ({
         if (insertCoin.count > 0) {
           machineCoin.count += insertCoin.count;
           insertCoin.count = 0;
-          updateInsertCoins.push(insertCoin);
+          saveOnlyInsertCoin(insertCoin);
         }
         if (
           total > 0 &&
@@ -68,17 +66,15 @@ const ReturnCoinButton = ({
           total -= count * Number(machineCoin.coin);
           machineCoin.count -= count;
           userCoin.count += count;
-          updateUserCoins.push(userCoin);
-          updateMachineCoins.push(machineCoin);
+          saveOnlyUserCoin(userCoin);
+          saveOnlyMachineCoin(machineCoin);
         } else if (total <= 0) {
           return;
         }
       });
       saveIsPurchased(false);
     }
-    saveUserCoins(updateUserCoins);
-    saveMachineCoins(updateMachineCoins);
-    saveInsertCoins(updateInsertCoins);
+    getUserCoins();
     saveTotalAmount(total);
   };
 

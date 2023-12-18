@@ -20,7 +20,7 @@ export const useMachineCoins = () => {
   };
 
   const saveMachineCoin = async (saveMachineCoin: Coin) => {
-    const { id,count } = saveMachineCoin;
+    const { id, count } = saveMachineCoin;
     try {
       const response = await updateMachineCoin(id, count);
       if (response) {
@@ -31,19 +31,31 @@ export const useMachineCoins = () => {
     }
   };
 
-  const saveMachineCoins = async (saveMachineCoins: Coin[]) => {
+  const saveOnlyMachineCoin = async (saveMachineCoin: Coin) => {
+    const { id, count } = saveMachineCoin;
     try {
-      const promises = saveMachineCoins.map(async (updateCoin) => {
-        const { id, count } = updateCoin;
-        await updateMachineCoin(id, count);
-      })
-      await Promise.all(promises);
-      await getMachineCoins();
-
+      const response = await updateMachineCoin(id, count);
+      if (response) {
+        return response.data;
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const saveMachineCoins = async (saveMachineCoins: Coin[]) => {
+  //   try {
+  //     const promises = saveMachineCoins.map(async (updateCoin) => {
+  //       const { id, count } = updateCoin;
+  //       await updateMachineCoin(id, count);
+  //     })
+  //     await Promise.all(promises);
+  //     await getMachineCoins();
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     getMachineCoins();
@@ -53,6 +65,6 @@ export const useMachineCoins = () => {
     getMachineCoins,
     machineCoins,
     saveMachineCoin,
-    saveMachineCoins
+    saveOnlyMachineCoin,
   };
 };

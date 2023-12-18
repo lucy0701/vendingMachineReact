@@ -29,14 +29,25 @@ export const useUserCoins = () => {
     }
   };
 
-  const saveUserCoins = async (saveUserCoins: Coin[]) => {
+  // const saveUserCoins = async (saveUserCoins: Coin[]) => {
+  //   try {
+  //     const promises = saveUserCoins.map(async (updateCoin) => {
+  //       const { id, count } = updateCoin;
+  //       await updateUserCoin(id, count);
+  //     })
+  //     await Promise.all(promises);
+  //     await getUserCoins();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  const saveOnlyUserCoin = async (saveUserCoin: Coin) => {
+    const { id, count } = saveUserCoin;
     try {
-      const promises = saveUserCoins.map(async (updateCoin) => {
-        const { id, count } = updateCoin;
-        await updateUserCoin(id, count);
-      })
-      await Promise.all(promises);
-      await getUserCoins();
+      const response = await updateUserCoin(id, count);
+      if (response) {
+        return response.data;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -46,5 +57,5 @@ export const useUserCoins = () => {
     getUserCoins();
   }, []);
 
-  return { getUserCoins, userCoins, saveUserCoin, saveUserCoins };
+  return { getUserCoins, userCoins, saveUserCoin, saveOnlyUserCoin };
 };

@@ -9,24 +9,27 @@ import { formatPrice } from '../utils/number';
 import { useItems } from '../hooks/useItems';
 import { useMachineCoins } from '../hooks/useMachineCoins';
 import { useUserCoins } from '../hooks/useUserCoins';
+import { useInsertCoins } from '../hooks/useInsertCoins';
 import { useTotalAmount } from '../hooks/useTotalAmount';
 import { useMyItems } from '../hooks/useMyItems';
-import { useInsertCoins } from '../hooks/useInsertCoins';
 import { useIsPurchased } from '../hooks/useIsPurchased';
 import { MyItem } from '../types/myItem';
 import { infoMessageState } from '../recoil/atoms/presentationAtoms/infoMessageState';
+
 import { useRecoilValue } from 'recoil';
 
 export default function MachinePage() {
+  
   const { items, saveItem } = useItems();
-  const { machineCoins, saveMachineCoins } = useMachineCoins();
-  const { userCoins, saveUserCoin, saveUserCoins } = useUserCoins();
+  const { machineCoins, saveOnlyMachineCoin } = useMachineCoins();
+  const { userCoins, saveUserCoin, saveOnlyUserCoin, getUserCoins } = useUserCoins();
   const { totalAmount, saveTotalAmount } = useTotalAmount();
+  const { insertCoins, saveInsertCoin, saveOnlyInsertCoin } = useInsertCoins();
   const { addMyItem } = useMyItems();
-  const { insertCoins, saveInsertCoin, saveInsertCoins } = useInsertCoins();
   const { isPurchased, saveIsPurchased } = useIsPurchased();
 
   const infoMessage = useRecoilValue(infoMessageState);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isGetItem, setIsGetItem] = useState(false);
   const [createMyItem, setCreateMyItem] = useState<MyItem>({
@@ -103,13 +106,14 @@ export default function MachinePage() {
           totalAmount={totalAmount}
           saveTotalAmount={saveTotalAmount}
           userCoins={userCoins}
-          saveUserCoins={saveUserCoins}
+          saveOnlyUserCoin={saveOnlyUserCoin}
           machineCoins={machineCoins}
-          saveMachineCoins={saveMachineCoins}
+          saveOnlyMachineCoin={saveOnlyMachineCoin}
           insertCoins={insertCoins}
-          saveInsertCoins={saveInsertCoins}
+          saveOnlyInsertCoin={saveOnlyInsertCoin}
           isPurchased={isPurchased}
           saveIsPurchased={saveIsPurchased}
+          getUserCoins={getUserCoins}
         />
         <GetItemBox
           createMyItem={createMyItem}
