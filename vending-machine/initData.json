@@ -51,59 +51,67 @@
   "items": [
     {
       "id": 0,
-      "itemName": "여주",
+      "itemName": "item01",
       "price": 155,
       "stock": 10,
-      "url": "/src_assets/img11.png"
+      "url": "/src_assets/img01.png",
+      "isModified": false
     },
     {
       "id": 1,
-      "itemName": "코순",
+      "itemName": "item02",
       "price": 888,
       "stock": 10,
-      "url": "/src_assets/img12.png"
+      "url": "/src_assets/img02.png",
+      "isModified": false
     },
     {
       "id": 2,
-      "itemName": "루미",
+      "itemName": "item03",
       "price": 700,
       "stock": 10,
-      "url": "/src_assets/img09.png"
+      "url": "/src_assets/img03.png",
+      "isModified": false
     },
     {
       "id": 3,
-      "itemName": "콩",
+      "itemName": "item04",
       "price": 20,
-      "stock": 10,
-      "url": "/src_assets/img17.png"
+      "stock": 2,
+      "url": "/src_assets/img04.png",
+      "isModified": false
     },
     {
       "id": 4,
-      "itemName": "재희",
+      "itemName": "item05",
       "price": 95,
       "stock": 10,
-      "url": "/src_assets/img10.png"
+      "url": "/src_assets/img05.png",
+      "isModified": false
     },
     {
       "id": 5,
-      "itemName": "번",
+      "itemName": "item06",
       "price": 18,
-      "stock": 10,
-      "url": "/src_assets/img14.png"
+      "stock": 6,
+      "url": "/src_assets/img06.png",
+      "isModified": false
     },
     {
       "id": 6,
-      "itemName": "승목",
+      "itemName": "item07",
       "price": 1000,
       "stock": 10,
-      "url": "/src_assets/img15.png"
+      "url": "/src_assets/img07.png",
+      "isModified": false
     },
     {
       "id": 7,
-      "itemName": "죽순",
+      "itemName": "item08",
       "price": 500,
       "stock": 10,
-      "url": "/src_assets/img16.png"
+      "url": "/src_assets/img08.png",
+      "isModified": false
     }
   ],
   "myitem-list": [
