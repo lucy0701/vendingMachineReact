@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   readItems,
   createItem,
@@ -6,9 +6,11 @@ import {
   deleteItem,
 } from '../services/item';
 import { Item } from '../types/item';
+import { useRecoilState } from 'recoil';
+import { itemState } from '../recoil/atoms/containerAtoms/itemState';
 
 export const useItems = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useRecoilState<Item[]>(itemState);
 
   const getItems = async () => {
     try {
@@ -17,7 +19,7 @@ export const useItems = () => {
         setItems(response.data);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -28,7 +30,7 @@ export const useItems = () => {
         return getItems();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -40,7 +42,7 @@ export const useItems = () => {
         return getItems();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -52,7 +54,7 @@ export const useItems = () => {
         return getItems();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

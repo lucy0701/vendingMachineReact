@@ -73,7 +73,6 @@ a {
 }
 .body-rigth {
   width: 37%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,7 +117,6 @@ a {
   position: absolute;
   top: 15px;
   left: 20px;
-  opacity: 0;
   transform: rotate(20deg);
   z-index: 80;
   background-color: #ff0000b6;
@@ -188,21 +186,44 @@ a {
 }
 
 /* 오른쪽 */
+.body-rigth h2 {
+  height: 30px;
+  margin: 10px;
+}
+.screen {
+  width: 100%;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info-screen,
 .total-screen {
   width: 100%;
-  height: 75px;
-  line-height: 65px;
-  padding: 0 15px;
   box-sizing: border-box;
   border-radius: 10px;
   background-color: rgb(252, 230, 226);
-  border: 5px solid #ffffff;
   box-sizing: border-box;
+}
+.info-screen {
+  height: 25px;
+  line-height: 25px;
+  background-color: #666;
+}
+.total-screen {
+  height: 65px;
+  padding: 0 15px;
+  line-height: 55px;
+  border: 5px solid #ffffff;
   box-shadow: 5px 5px 5px rgba(161, 161, 161, 0.714) inset;
+}
+.info-message {
+  color: #fff;
+  font-size: 13px;
 }
 .total-num {
   color: #7786c5;
-  font-size: 38px;
+  font-size: 32px;
   float: right;
 }
 .ent-coin-box {
@@ -232,7 +253,6 @@ a {
   border-right: 5px solid #d8caaf;
   border-bottom: 5px solid #c2b996;
 }
-
 .return-coin-btn {
   width: 50px;
   height: 50px;
@@ -386,8 +406,8 @@ a {
   box-sizing: border-box;
   border-radius: 5px;
   position: absolute;
-  top: 250px;
-  left: 270px;
+  top: 35%;
+  left: 35%;
   background-color: #ffffff;
 }
 .check-modal-message {
@@ -401,15 +421,16 @@ a {
   margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
-  z-index: 900;
 }
 .modal-box {
   position: absolute;
-  width: 800px;
-  height: 600px;
-  top: -25px;
-  left: -150px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   background-color: #333333b6;
+  z-index: 900;
+
 }
 
 /* 매니저페이지 */

@@ -1,182 +1,208 @@
 {
   "total-amount": {
-    "total": 0
+    "total": 30
   },
   "user-coins": [
     {
       "id": 0,
       "coin": "100",
-      "count": 71
+      "count": 22
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 126
+      "count": 121
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 112
+      "count": 201
     },
     {
       "id": 3,
       "coin": "5",
-      "count": 10
+      "count": 136
     },
     {
       "id": 4,
       "coin": "1",
-      "count": 10
+      "count": 130
     }
   ],
   "machine-coins": [
     {
       "id": 0,
       "coin": "100",
-      "count": 110
+      "count": 111
     },
     {
       "id": 1,
       "coin": "50",
-      "count": 87
+      "count": 72
     },
     {
       "id": 2,
       "coin": "10",
-      "count": 67
+      "count": 76
     },
     {
       "id": 3,
       "coin": "5",
-      "count": 10
+      "count": 198
     },
     {
       "id": 4,
       "coin": "1",
-      "count": 10
+      "count": 192
     }
   ],
   "items": [
     {
       "id": 0,
-      "itemName": "여주",
+      "itemName": "item01",
       "price": 155,
       "stock": 10,
-      "url": "/src_assets/img11.png"
+      "url": "/src_assets/img01.png",
+      "isModified": false
     },
     {
       "id": 1,
-      "itemName": "코순",
+      "itemName": "item02",
       "price": 888,
       "stock": 10,
-      "url": "/src_assets/img12.png"
+      "url": "/src_assets/img02.png",
+      "isModified": false
     },
     {
       "id": 2,
-      "itemName": "루미",
+      "itemName": "item03",
       "price": 700,
       "stock": 10,
-      "url": "/src_assets/img09.png"
+      "url": "/src_assets/img03.png",
+      "isModified": false
     },
     {
       "id": 3,
-      "itemName": "콩",
+      "itemName": "item04",
       "price": 20,
-      "stock": 40,
-      "url": "/src_assets/img17.png"
+      "stock": 9,
+      "url": "/src_assets/img04.png",
+      "isModified": false
     },
     {
       "id": 4,
-      "itemName": "재희",
+      "itemName": "item05",
       "price": 95,
       "stock": 10,
-      "url": "/src_assets/img10.png"
+      "url": "/src_assets/img05.png",
+      "isModified": false
     },
     {
       "id": 5,
-      "itemName": "번",
+      "itemName": "item06",
       "price": 18,
-      "stock": 10,
-      "url": "/src_assets/img14.png"
+      "stock": 0,
+      "url": "/src_assets/img06.png",
+      "isModified": false
     },
     {
       "id": 6,
-      "itemName": "승목",
+      "itemName": "item07",
       "price": 1000,
       "stock": 10,
-      "url": "/src_assets/img15.png"
+      "url": "/src_assets/img07.png",
+      "isModified": false
     },
     {
       "id": 7,
-      "itemName": "죽순",
+      "itemName": "item08",
       "price": 500,
       "stock": 10,
-      "url": "/src_assets/img16.png"
+      "url": "/src_assets/img08.png",
+      "isModified": false
     }
   ],
   "default-items": [
     {
       "id": 0,
-      "itemName": "여주",
+      "itemName": "item01",
       "price": 155,
       "stock": 10,
-      "url": "/src_assets/img11.png"
+      "url": "/src_assets/img01.png",
+      "isModified": false
     },
     {
       "id": 1,
-      "itemName": "코순",
+      "itemName": "item02",
       "price": 888,
       "stock": 10,
-      "url": "/src_assets/img12.png"
+      "url": "/src_assets/img02.png",
+      "isModified": false
     },
     {
       "id": 2,
-      "itemName": "루미",
+      "itemName": "item03",
       "price": 700,
       "stock": 10,
-      "url": "/src_assets/img09.png"
+      "url": "/src_assets/img03.png",
+      "isModified": false
     },
     {
       "id": 3,
-      "itemName": "콩",
+      "itemName": "item04",
       "price": 20,
-      "stock": 10,
-      "url": "/src_assets/img17.png"
+      "stock": 2,
+      "url": "/src_assets/img04.png",
+      "isModified": false
     },
     {
       "id": 4,
-      "itemName": "재희",
+      "itemName": "item05",
       "price": 95,
       "stock": 10,
-      "url": "/src_assets/img10.png"
+      "url": "/src_assets/img05.png",
+      "isModified": false
     },
     {
       "id": 5,
-      "itemName": "번",
+      "itemName": "item06",
       "price": 18,
-      "stock": 10,
-      "url": "/src_assets/img14.png"
+      "stock": 6,
+      "url": "/src_assets/img06.png",
+      "isModified": false
     },
     {
       "id": 6,
-      "itemName": "승목",
+      "itemName": "item07",
       "price": 1000,
       "stock": 10,
-      "url": "/src_assets/img15.png"
+      "url": "/src_assets/img07.png",
+      "isModified": false
     },
     {
       "id": 7,
-      "itemName": "죽순",
+      "itemName": "item08",
       "price": 500,
       "stock": 10,
-      "url": "/src_assets/img16.png"
+      "url": "/src_assets/img08.png",
+      "isModified": false
     }
   ],
   "myitems": [
     {
       "id": 2,
-      "itemName": "콩",
-      "url": "/src_assets/img17.png"
+      "itemName": "item04",
+      "url": "/src_assets/img04.png"
+    },
+    {
+      "id": 3,
+      "itemName": "item04",
+      "url": "/src_assets/img04.png"
+    },
+    {
+      "id": 4,
+      "itemName": "item04",
+      "url": "/src_assets/img04.png"
     }
   ],
   "insert-coins": [
@@ -188,7 +214,7 @@
     {
       "id": 1,
       "coin": "50",
-      "count": 0
+      "count": 2
     },
     {
       "id": 2,
@@ -207,6 +233,6 @@
     }
   ],
   "is-purchased": {
-    "purchased": false
+    "purchased": true
   }
 }

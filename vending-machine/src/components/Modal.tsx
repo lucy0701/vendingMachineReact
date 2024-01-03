@@ -1,27 +1,22 @@
 import React from 'react';
 
 interface ModalProps {
-  name: string;
-  btnClassName: string;
-  btnName: string;
   isOpen: boolean;
   children: React.ReactNode;
   onClickModal: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  name,
-  isOpen,
-  btnClassName,
-  btnName,
-  children,
-  onClickModal,
-}) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, children, onClickModal }) => {
+  
   return (
-    <div className={name} style={{ display: isOpen ? 'block' : 'none' }}>
+    <div className="coin-modal" style={{ display: isOpen ? 'block' : 'none' }}>
       <div>{children}</div>
-      <button type="button" className={btnClassName} onClick={onClickModal}>
-        {btnName}
+      <button
+        type="button"
+        className="coin-modal-close-btn"
+        onClick={onClickModal}
+      >
+        CLOSE
       </button>
     </div>
   );

@@ -1,37 +1,36 @@
 import React from 'react';
+import {
+  dragInpoMessageState,
+  isDropFieldState,
+} from '../recoil/atoms/presentationAtoms/dragAndDropState';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+
 
 interface EntCoinBoxPorps {
-  dragInpoMessage: string;
   onClickModal: () => void;
-  handleDragInpoMessage: (message: string) => void;
-  setIsDropField: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EntCoinBox: React.FC<EntCoinBoxPorps> = ({
-  dragInpoMessage,
-  onClickModal,
-  handleDragInpoMessage,
-  setIsDropField,
-}) => {
+const EntCoinBox: React.FC<EntCoinBoxPorps> = ({ onClickModal }) => {
+  const setIsDropField = useSetRecoilState<boolean>(isDropFieldState);
+  const [dragInpoMessage, setdragInpoMessage] =
+    useRecoilState<string>(dragInpoMessageState);
+
   const handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
-    console.log('PSJ: dragEnter', e.target);
     setIsDropField(true);
-    handleDragInpoMessage('동전을 놔주세요');
+    setdragInpoMessage('동전을 놔주세요');
   };
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDropField(false);
-    console.log('PSJ: dragLeave', e.target);
-    handleDragInpoMessage('거기말고! 여기!');
+    setdragInpoMessage('거기말고! 여기!');
   };
 
   const handleDropOnMap = (e: React.DragEvent) => {
     e.preventDefault();
-    handleDragInpoMessage('갑사합니다 :)');
-
+    setdragInpoMessage('갑사합니다 :)');
     setTimeout(() => {
-      handleDragInpoMessage('');
+      setdragInpoMessage('');
     }, 1000);
   };
 

@@ -1,58 +1,59 @@
 import React from 'react';
 import { Coin } from '../types/coin';
+import {
+  dragInpoMessageState,
+  isDropFieldState,
+} from '../recoil/atoms/presentationAtoms/dragAndDropState';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 interface UserCoinProps {
   userCoin: Coin;
-  insertCoins: Coin[];
   totalAmount: number;
-  handleSaveUserCoin: (userCoin: Coin) => void;
-  handleSaveInsertCoin: (insertCoins: Coin) => void;
-  handleSaveTotalAmount: (totalNum: number) => void;
-  handleDragInpoMessage: (message: string) => void;
-  isDropField: boolean;
-  setIsDropField: React.Dispatch<React.SetStateAction<boolean>>;
+  saveTotalAmount: (saveTotalAmount: number) => Promise<void>;
+  saveUserCoin: (saveUserCoin: Coin) => Promise<void>;
+  insertCoins: Coin[];
+  saveInsertCoin: (saveInsertCoin: Coin) => Promise<void>;
 }
 
 const UserCoin: React.FC<UserCoinProps> = ({
   userCoin,
-  insertCoins,
   totalAmount,
-  handleSaveUserCoin,
-  handleSaveInsertCoin,
-  handleSaveTotalAmount,
-  handleDragInpoMessage,
-  isDropField,
-  setIsDropField,
+  saveTotalAmount,
+  saveUserCoin,
+  insertCoins,
+  saveInsertCoin
 }) => {
+  const setDragInpoMessage = useSetRecoilState(dragInpoMessageState);
+  const [isDropField, setIsDropField] =
+    useRecoilState<boolean>(isDropFieldState);
+
   const handleDragStart = () => {
-    handleDragInpoMessage('여기에요!');
+    setDragInpoMessage('여기에요!');
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
     const value = Number(target.getAttribute('value'));
-
     if (isDropField) {
       insertUserCoin(value);
       setIsDropField(false);
     }
-
     setTimeout(() => {
-      handleDragInpoMessage('');
+      setDragInpoMessage('');
     }, 1000);
   };
 
   const insertUserCoin = (value: number) => {
     if (userCoin.count > 0) {
       const updateTotalNum = totalAmount + Number(userCoin.coin);
-      const updateUserCoin = userCoin;
-      const updateInsertCoin = insertCoins[value];
+      const updateUserCoin = { ...userCoin };
+      const updateInsertCoin = { ...insertCoins[value] };
       updateUserCoin.count -= 1;
       updateInsertCoin.count += 1;
-      handleSaveTotalAmount(updateTotalNum);
-      handleSaveUserCoin(updateUserCoin);
-      handleSaveInsertCoin(updateInsertCoin);
+      saveTotalAmount(updateTotalNum);
+      saveUserCoin(updateUserCoin);
+      saveInsertCoin(updateInsertCoin);
     }
   };
 

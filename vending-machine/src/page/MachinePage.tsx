@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ItemBox from '../components/ItemBox';
 import Modal from '../components/Modal';
 import UserCoin from '../components/UserCoin';
@@ -12,78 +12,56 @@ import { useUserCoins } from '../hooks/useUserCoins';
 import { useInsertCoins } from '../hooks/useInsertCoins';
 import { useTotalAmount } from '../hooks/useTotalAmount';
 import { useMyItems } from '../hooks/useMyItems';
-import { Coin } from '../types/coin';
-import { Item } from '../types/item';
-import { MyItem } from '../types/myItem';
 import { useIsPurchased } from '../hooks/useIsPurchased';
-// import { useMultipleCoins } from '../hooks/useMultipleCoins';
+import { MyItem } from '../types/myItem';
+import { infoMessageState } from '../recoil/atoms/presentationAtoms/infoMessageState';
+
+import { useRecoilValue } from 'recoil';
 
 export default function MachinePage() {
+  
   const { items, saveItem } = useItems();
-  const { machineCoins, saveMachineCoin } = useMachineCoins();
-  const { userCoins, saveUserCoin } = useUserCoins();
+  const { machineCoins, saveOnlyMachineCoin } = useMachineCoins();
+  const { userCoins, saveUserCoin, saveOnlyUserCoin, getUserCoins } = useUserCoins();
   const { totalAmount, saveTotalAmount } = useTotalAmount();
-  const { insertCoins, saveInsertCoin } = useInsertCoins();
+  const { insertCoins, saveInsertCoin, saveOnlyInsertCoin } = useInsertCoins();
   const { addMyItem } = useMyItems();
   const { isPurchased, saveIsPurchased } = useIsPurchased();
-  // const { multipleUpdatesCoins } = useMultipleCoins();
+
+  const infoMessage = useRecoilValue(infoMessageState);
 
   const [isOpen, setIsOpen] = useState(false);
   const [isGetItem, setIsGetItem] = useState(false);
-  const [dragInpoMessage, setDragInpoMessage] = useState('');
-  const [isDropField, setIsDropField] = useState(false);
   const [createMyItem, setCreateMyItem] = useState<MyItem>({
     id: 0,
     itemName: '',
     url: '',
   });
 
-  const handleSaveTotalAmount = (totalNum: number) => {
-    saveTotalAmount(totalNum);
-  };
-  const handleSaveUserCoin = (userCoin: Coin) => {
-    saveUserCoin(userCoin);
-  };
-  const handleSaveInsertCoin = (insertCoin: Coin) => {
-    saveInsertCoin(insertCoin);
-  };
-  const handleSaveMachineCoin = (machineCoin: Coin) => {
-    saveMachineCoin(machineCoin);
-  };
-  const handleSaveItem = (item: Item) => {
-    saveItem(item);
-  };
-  const hanaleSaveIsPurchased = (isPurchased: boolean) => {
-    saveIsPurchased(isPurchased);
-  };
-
-  const handleAddMyItem = (myItem: MyItem) => {
-    addMyItem(myItem);
-  };
-
-  const handleDragInpoMessage = (message: string) => {
-    setDragInpoMessage(message);
-  };
-  const handleUdateIsPurchased = (isPurchased: boolean) => {
-    hanaleSaveIsPurchased(isPurchased);
-  };
-
   const handleMyItem = (name: string, imgUrl: string) => {
     setCreateMyItem({ id: 0, itemName: name, url: imgUrl });
-    handleAddMyItem({ id: 0, itemName: name, url: imgUrl });
+    addMyItem({ id: 0, itemName: name, url: imgUrl });
     setIsGetItem(true);
   };
 
   const onClickModal = () => (isOpen ? setIsOpen(false) : setIsOpen(true));
 
-  const showGetItem = () =>
-    isGetItem ? setIsGetItem(false) : setIsGetItem(true);
-
-  const onClickMyItme = () => {
-    if (isGetItem) {
-      showGetItem();
-    }
+  const onClickMyItem = () => {
+    if (isGetItem) setIsGetItem(false);
   };
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        onClickModal();
+      }
+    };
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [isOpen]);
 
   return (
     <div className="machine-body">
@@ -93,11 +71,11 @@ export default function MachinePage() {
             <ItemBox
               key={item.id}
               item={item}
-              totalAmount={totalAmount}
-              handleSaveTotalAmount={handleSaveTotalAmount}
-              handleSaveItem={handleSaveItem}
               handleMyItem={handleMyItem}
-              handleUdateIsPurchased={handleUdateIsPurchased}
+              totalAmount={totalAmount}
+              saveTotalAmount={saveTotalAmount}
+              saveItem={saveItem}
+              saveIsPurchased={saveIsPurchased}
             />
           ))}
         </div>
@@ -114,56 +92,46 @@ export default function MachinePage() {
       </div>
 
       <div className="body-rigth">
-        <h2>CRYSTAL</h2>
-        <div className="total-screen">
-          <span className="total-num">{formatPrice(totalAmount)}</span>
+        <div className="screen">
+          <h2>CRYSTAL</h2>
+          <div className="info-screen">
+            <span className="info-message">{infoMessage}</span>
+          </div>
+          <div className="total-screen">
+            <span className="total-num">{formatPrice(totalAmount)}</span>
+          </div>
         </div>
-        <EntCoinBox
-          dragInpoMessage={dragInpoMessage}
-          onClickModal={onClickModal}
-          handleDragInpoMessage={handleDragInpoMessage}
-          setIsDropField={setIsDropField}
-        />
+        <EntCoinBox onClickModal={onClickModal} />
         <ReturnCoinButton
           totalAmount={totalAmount}
+          saveTotalAmount={saveTotalAmount}
           userCoins={userCoins}
-          insertCoins={insertCoins}
+          saveOnlyUserCoin={saveOnlyUserCoin}
           machineCoins={machineCoins}
+          saveOnlyMachineCoin={saveOnlyMachineCoin}
+          insertCoins={insertCoins}
+          saveOnlyInsertCoin={saveOnlyInsertCoin}
           isPurchased={isPurchased}
-          handleSaveTotalAmount={handleSaveTotalAmount}
-          handleSaveUserCoin={handleSaveUserCoin}
-          handleSaveInsertCoin={handleSaveInsertCoin}
-          handleSaveMachineCoin={handleSaveMachineCoin}
-          handleUdateIsPurchased={handleUdateIsPurchased}
-
-          // multipleUpdatesCoins ={multipleUpdatesCoins}
+          saveIsPurchased={saveIsPurchased}
+          getUserCoins={getUserCoins}
         />
         <GetItemBox
           createMyItem={createMyItem}
           isGetItem={isGetItem}
-          onClickMyItme={onClickMyItme}
+          onClickMyItem={onClickMyItem}
         />
       </div>
-      <Modal
-        name="coin-modal"
-        isOpen={isOpen}
-        onClickModal={onClickModal}
-        btnClassName="coin-modal-close-btn"
-        btnName="CLOSE"
-      >
+      <Modal isOpen={isOpen} onClickModal={onClickModal}>
         {userCoins.map(userCoin => {
           return (
             <UserCoin
               key={userCoin.coin}
               userCoin={userCoin}
-              insertCoins={insertCoins}
               totalAmount={totalAmount}
-              handleSaveUserCoin={handleSaveUserCoin}
-              handleSaveInsertCoin={handleSaveInsertCoin}
-              handleSaveTotalAmount={handleSaveTotalAmount}
-              handleDragInpoMessage={handleDragInpoMessage}
-              setIsDropField={setIsDropField}
-              isDropField={isDropField}
+              saveTotalAmount={saveTotalAmount}
+              saveUserCoin={saveUserCoin}
+              insertCoins={insertCoins}
+              saveInsertCoin={saveInsertCoin}
             />
           );
         })}

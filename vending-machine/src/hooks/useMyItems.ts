@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   readMyItems,
   createMyItem,
@@ -6,14 +6,15 @@ import {
   deleteMyItem,
 } from '../services/myItem';
 import { MyItem } from '../types/myItem';
+import { useRecoilState } from 'recoil';
+import { myItemState } from '../recoil/atoms/containerAtoms/myItemState';
 
 export const useMyItems = () => {
-  const [myItems, setMyItems] = useState<MyItem[]>([]);
+  const [myItems, setMyItems] = useRecoilState<MyItem[]>(myItemState);
 
   const getMyItems = async () => {
     try {
       const response = await readMyItems();
-
       if (response) {
         setMyItems(response.data);
       }

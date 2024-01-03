@@ -1,94 +1,85 @@
-// import { useEffect, useState } from 'react';
 import { Coin } from '../types/coin';
 
 interface ReturnCoinButtonProps {
   totalAmount: number;
+  saveTotalAmount: (saveTotalAmount: number) => Promise<void>;
   userCoins: Coin[];
-  insertCoins: Coin[];
+  saveOnlyUserCoin: (saveUserCoin: Coin) => Promise<void>;
   machineCoins: Coin[];
-  isPurchased: boolean | undefined;
-  handleSaveTotalAmount: (updateTotalNum: number) => void;
-  handleSaveUserCoin: (userCoin: Coin) => void;
-  handleSaveInsertCoin: (insertCoin: Coin) => void;
-  handleSaveMachineCoin: (machineCoin: Coin) => void;
-  handleUdateIsPurchased: (purchased: boolean) => void;
-
-  // multipleUpdatesCoins: (
-  //   userCoin: Coin,
-  //   machineCoin: Coin,
-  //   insertCoin: Coin,
-  // ) => void;
+  saveOnlyMachineCoin: (saveMachineCoin: Coin) => Promise<void>;
+  insertCoins: Coin[];
+  saveOnlyInsertCoin: (saveInsertCoin: Coin) => Promise<void>;
+  isPurchased: boolean;
+  saveIsPurchased: (saveIsPurchased: boolean) => Promise<void>;
+  getUserCoins: () => Promise<void>;
 }
 const ReturnCoinButton = ({
-  userCoins,
   totalAmount,
-  insertCoins,
+  saveTotalAmount,
+  userCoins,
+  saveOnlyUserCoin,
   machineCoins,
+  saveOnlyMachineCoin,
+  insertCoins,
+  saveOnlyInsertCoin,
   isPurchased,
-  handleSaveTotalAmount,
-  handleSaveUserCoin,
-  handleSaveInsertCoin,
-  handleSaveMachineCoin,
-  handleUdateIsPurchased, // multipleUpdatesCoins,
+  saveIsPurchased,
+  getUserCoins,
 }: ReturnCoinButtonProps) => {
   const handleReturnBtn = () => {
-    let minusTotal = totalAmount;
+    let total = totalAmount;
 
     if (!isPurchased) {
-      userCoins.forEach((userCoin, index) => {
-        const insertCoin = insertCoins[index];
+      userCoins.forEach((coin, index) => {
+        const userCoin = { ...coin };
+        const insertCoin = { ...insertCoins[index] };
         if (insertCoin.count !== 0) {
-          minusTotal -= Number(insertCoin.coin) * insertCoin.count;
+          total -= Number(insertCoin.coin) * insertCoin.count;
           userCoin.count += insertCoin.count;
           insertCoin.count = 0;
-          handleSaveUserCoin(userCoin);
-          handleSaveInsertCoin(insertCoin);
-        } else if (minusTotal <= 0) {
+          saveOnlyUserCoin(userCoin);
+          saveOnlyInsertCoin(insertCoin);
+        } else if (total <= 0) {
           return;
         }
       });
     } else if (isPurchased) {
       let count = 0;
 
-      userCoins.forEach((userCoin, index) => {
-        const machineCoin = machineCoins[index];
-        const insertCoin = insertCoins[index];
+      userCoins.forEach((coin, index) => {
+        const userCoin = { ...coin };
+        const machineCoin = { ...machineCoins[index] };
+        const insertCoin = { ...insertCoins[index] };
 
-        count = Math.floor(minusTotal / Number(machineCoin.coin));
-
+        count = Math.floor(total / Number(machineCoin.coin));
         if (insertCoin.count > 0) {
           machineCoin.count += insertCoin.count;
           insertCoin.count = 0;
-          handleSaveInsertCoin(insertCoin);
+          saveOnlyInsertCoin(insertCoin);
         }
         if (
-          minusTotal > 0 &&
+          total > 0 &&
           machineCoin.count > 0 &&
           machineCoin.count >= count &&
           count > 0
         ) {
-          minusTotal -= count * Number(machineCoin.coin);
+          total -= count * Number(machineCoin.coin);
           machineCoin.count -= count;
           userCoin.count += count;
-
-          handleSaveUserCoin(userCoin);
-          handleSaveMachineCoin(machineCoin);
-          // multipleUpdatesCoins(userCoin, machineCoin, insertCoin);
-        } else if (minusTotal <= 0) {
+          saveOnlyUserCoin(userCoin);
+          saveOnlyMachineCoin(machineCoin);
+        } else if (total <= 0) {
           return;
         }
       });
-      handleUdateIsPurchased(false);
+      saveIsPurchased(false);
     }
-    handleSaveTotalAmount(minusTotal);
-  };
-
-  const onClickReturnBtn = () => {
-    handleReturnBtn();
+    getUserCoins();
+    saveTotalAmount(total);
   };
 
   return (
-    <button className="return-coin-btn" onClick={onClickReturnBtn}>
+    <button className="return-coin-btn" onClick={handleReturnBtn}>
       반환
     </button>
   );

@@ -4,15 +4,15 @@ import { MyItem } from '../types/myItem';
 interface GetItemBoxProps {
   createMyItem: MyItem;
   isGetItem: boolean;
-  onClickMyItme: () => void;
+  onClickMyItem: () => void;
 }
 const GetItemBox: React.FC<GetItemBoxProps> = ({
   createMyItem,
   isGetItem,
-  onClickMyItme,
+  onClickMyItem,
 }) => {
   return (
-    <button className="get-item-box" onClick={onClickMyItme}>
+    <button className="get-item-box" onClick={onClickMyItem}>
       <img
         className="drop-item"
         src={createMyItem.url}
